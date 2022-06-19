@@ -1,0 +1,142 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column{
+  flex-direction: column;
+}
+
+.gap-xsm{
+  gap:.5em;
+}
+
+.gap-sm{
+  gap:1.5em
+}
+
+.gap-md{
+  gap:3em;
+}
+
+.align-start{
+  align-items: flex-start;
+}
+
+.app{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header{
+  width: calc(100% - 4em);
+  height:min-content;
+  padding: 2em;
+  justify-content: flex-start;
+}
+
+.body{
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding-top: 3em;
+}
+
+.header h1{
+  font-size: 2.5em;
+  font-weight: 400;
+}
+
+.burger{
+  width: 2em;
+  height: 2em;
+  padding: .5em;
+}
+
+.icon-burger{
+  height:100%;
+  width: 100%;
+}
+
+.card{
+  padding: 1.5em;
+  border-radius: .75em;
+}
+
+.label-text{
+  font-size: 1.5em;
+}
+
+.input-text{
+  font-size: 2.5em;
+  font-family: inherit;
+  font-weight: 300;
+  padding-left: .6em;
+  padding-right: .6em;
+  padding-top: .4em;
+  padding-bottom: .4em;
+  border-radius: 3em;
+  width: 17em;
+}
+
+.input-button{
+  font-size: 2.5em;
+  font-weight: 400;
+  font-family: inherit;
+  padding-left: .8em;
+  padding-right: .8em;
+  padding-top: .2em;
+  padding-bottom: .2em; 
+  border-radius: .25em;
+  border-bottom: 2px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid #555;
+}
+
+.input-button:active{
+  border-top: 2px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid #555;
+}
+
+.form-title{
+  font-size: 3em;
+  font-weight: 500;
+}
+
+.menu{
+  position:absolute;
+  left:-36em;
+  top:0;
+  z-index: 1;
+  width: 31em;
+  height: calc(100% - 4em);
+  padding: 2em;
+  transition: left 1s cubic-bezier(.28,.41,.09,.95);
+}
+
+.menu h2{
+  font-size: 3em;
+  font-weight: 600;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  width:12ch;
+
+}
+
+.nav{
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  
+}
+
+.nav-link{
+  font-size: 2.75em;
+  text-decoration: none;
+}
