@@ -7,7 +7,7 @@ const InputText = ({name, label} : {name:string, label:string},props : React.HTM
     const handleChange:ChangeEventHandler<HTMLInputElement> = (e)=>{
         setValue(e.currentTarget.value)
     }
-    const theme = useContext(Theme)
+    const {theme} = useContext(Theme)
     return <div className="container column align-start gap-xsm" {...props}>
         <label htmlFor={id} className='label-text' style={{color:theme.text}}>
             {label}

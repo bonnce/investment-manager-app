@@ -14,12 +14,12 @@ const themes = {
         'thirty' : "#3C5095",
         'ten' : "#2BE5F1",
         'text' : "#FFFFFF",
-        'shadow' : "#2BE5F148",
+        'shadow' : "#2BE5F128",
         'invert' : "1",
     }
 }
 
-const Theme = React.createContext(themes.light)
+const Theme = React.createContext({theme:themes.light,setTheme:()=>{}})
 
 export{
     themes,

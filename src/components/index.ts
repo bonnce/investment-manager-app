@@ -5,6 +5,8 @@ import Body from "./body";
 import Card from "./card";
 import { InputButton, InputText } from "./input";
 import Menu from "./menu";
+import Collapse from "./collapse";
+import { DiamondButton } from "./button";
 
 export {
     Header,
@@ -14,5 +16,7 @@ export {
     Card,
     InputButton,
     InputText,
-    Menu
+    Menu,
+    Collapse,
+    DiamondButton
 }

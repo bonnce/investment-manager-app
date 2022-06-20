@@ -54,9 +54,10 @@
   width: 2em;
   height: 2em;
   padding: .5em;
+  cursor: pointer;
 }
 
-.icon-burger{
+.icon{
   height:100%;
   width: 100%;
 }
@@ -120,7 +121,7 @@
   transition: left 1s cubic-bezier(.28,.41,.09,.95);
 }
 
-.menu h2{
+.menu-title{
   font-size: 3em;
   font-weight: 600;
   text-transform: uppercase;
@@ -138,5 +139,57 @@
 
 .nav-link{
   font-size: 2.75em;
+  font-weight: 400;
   text-decoration: none;
+}
+
+.collapse{
+  width: fit-content;
+}
+
+.collapse-title{
+  font-size: 2.75em;
+  font-weight: 400;
+  cursor:pointer;
+}
+
+.content-collapsed{
+  width:calc(100% - 2em);
+  overflow: hidden;
+  transition: all .5s ease;
+  padding-left: 2em;
+  padding-top: .5em ;
+  padding-bottom: .5em;
+}
+
+.collapsed-open > *{
+  opacity: 1;
+  transition: all .5s ease;
+}
+.collapsed-close > *{
+  opacity: 0;
+  transition: all .5s ease;
+}
+
+.diamond-button{
+  width: 4em;
+  height: 4em;
+  padding:1em;
+  transform: rotate(45deg);
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-left: 1px solid #aaa;
+  border-top: 1px solid #aaa;
+}
+
+.diamond-button:active{
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 1px solid #555;
+  border-bottom: 1px solid #555;
+}
+
+.theme-icon{
+  flex-grow: 1;
+  justify-content: flex-end;
 }

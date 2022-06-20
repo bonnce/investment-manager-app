@@ -1,12 +1,15 @@
-import { Theme } from "misc"
-import { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Collapse } from "components"
+import BaseLink from "./baseLink"
 
-const Navigation = ()=>{
-    const theme = useContext(Theme)
-    return <div className='container column align-start nav'>
-        <Link to='/' className="nav-link" style={{color:theme.text}}>Agregar Moneda</Link>
+const ARRAY = ['ETH','ADA', 'BTC']
+
+const Navigation = ({handleLinkClick} : {handleLinkClick:VoidFunction}) => 
+    <div className='container column align-start gap-md nav'>
+        <BaseLink to='/' onClick={handleLinkClick} >Agregar Moneda</BaseLink>
+        <BaseLink to='/summary' onClick={handleLinkClick} >Resumen</BaseLink>
+        <Collapse title="Monedas">
+            {ARRAY.map((i) => <BaseLink to={`/${i}`} key={i} onClick={handleLinkClick} >{i}</BaseLink>)}
+        </Collapse>
     </div>
-}
 
 export default Navigation
