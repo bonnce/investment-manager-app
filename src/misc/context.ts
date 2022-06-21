@@ -14,7 +14,7 @@ const themes = {
         'thirty' : "#3C5095",
         'ten' : "#2BE5F1",
         'text' : "#FFFFFF",
-        'shadow' : "#2BE5F128",
+        'shadow' : "#3C5095B0",
         'invert' : "1",
     }
 }

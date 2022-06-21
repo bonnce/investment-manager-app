@@ -1,9 +1,14 @@
-import { DiamondButton } from "components";
+import { PlusButton } from "components";
 import { BasicAppPage } from "pages";
-import cross from 'assets/images/cross.svg'
+import PurchaseCard from "./purchaseCard";
 
-const Currency = ({title} : {title:string}) =><BasicAppPage title={title}>
-<DiamondButton icon={cross} />
-</BasicAppPage>
+const Currency = ({title} : {title:string}) =>{
+    return <BasicAppPage title={title}>
+        <div className="container column gap-lg">
+                <PurchaseCard/>
+                <PlusButton />
+        </div>
+            </BasicAppPage>
+}
 
 export default Currency

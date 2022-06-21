@@ -20,6 +20,10 @@
   gap:3em;
 }
 
+.gap-lg{
+  gap:5em;
+}
+
 .align-start{
   align-items: flex-start;
 }
@@ -50,7 +54,7 @@
   font-weight: 400;
 }
 
-.burger{
+.icon-2x2{
   width: 2em;
   height: 2em;
   padding: .5em;
@@ -60,6 +64,8 @@
 .icon{
   height:100%;
   width: 100%;
+  user-select: none;
+  pointer-events: none;
 }
 
 .card{
@@ -156,7 +162,7 @@
 .content-collapsed{
   width:calc(100% - 2em);
   overflow: hidden;
-  transition: all .5s ease;
+  transition: max-height .5s ease;
   padding-left: 2em;
   padding-top: .5em ;
   padding-bottom: .5em;
@@ -164,11 +170,11 @@
 
 .collapsed-open > *{
   opacity: 1;
-  transition: all .5s ease;
+  transition: opacity .5s ease;
 }
 .collapsed-close > *{
   opacity: 0;
-  transition: all .5s ease;
+  transition: opacity .5s ease;
 }
 
 .diamond-button{
@@ -176,20 +182,46 @@
   height: 4em;
   padding:1em;
   transform: rotate(45deg);
-  border-bottom: 2px solid black;
-  border-right: 2px solid black;
-  border-left: 1px solid #aaa;
-  border-top: 1px solid #aaa;
+  transition: background-color 100ms ease, box-shadow 100ms ease ;
+  border: none;
 }
 
 .diamond-button:active{
-  border-top: 2px solid black;
-  border-left: 2px solid black;
-  border-right: 1px solid #555;
-  border-bottom: 1px solid #555;
+  transition: background-color 100ms ease, box-shadow 100ms ease ;
 }
 
 .theme-icon{
   flex-grow: 1;
   justify-content: flex-end;
+}
+
+.purchase-label{
+  font-size: 1em;
+  font-weight: 100;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+.cost{
+  font-size: 4.5em;
+  font-weight: 500;
+  width: 8ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:clip;
+}
+
+.bought{
+  font-size: 2.75em;
+  font-weight: 500;
+  width: 12ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.usd{
+  font-size: 2.25em;
+  font-weight: 300;
+  color: #848484;
 }

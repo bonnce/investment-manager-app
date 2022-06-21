@@ -1,14 +1,9 @@
-import { Card, Form } from "components"
 import { BasicAppPage } from "pages"
+import AddCurrency from "./addCurrency"
 
-const INPUTS = [{name:"name",label:'Nombre'}, {name:"shortName",label:'Apodo'}]
-const CurrencyManager = () => <BasicAppPage title="Administrar Monedas">
-    <Card>
-        <div className="container column gap-md">
-            <h2 className="form-title">Agregar Moneda</h2>
-            <Form inputs={INPUTS} />
-        </div>
-    </Card>
+const CurrencyManager = () => 
+<BasicAppPage title="Administrar Monedas">
+    <AddCurrency />
 </BasicAppPage>
 
 export default CurrencyManager

@@ -1,22 +1,26 @@
 import Header from "./header";
 import Form from "./form";
-import Burger from "./burger";
+import { Icon, Icon2x2, ThemedIcon2x2 } from "./burger";
 import Body from "./body";
 import Card from "./card";
 import { InputButton, InputText } from "./input";
 import Menu from "./menu";
 import Collapse from "./collapse";
-import { DiamondButton } from "./button";
+import { DiamondButton, PlusButton } from "./button";
+
 
 export {
     Header,
     Form,
-    Burger,
+    Icon,
+    Icon2x2,
+    ThemedIcon2x2,
     Body,
     Card,
     InputButton,
     InputText,
     Menu,
     Collapse,
-    DiamondButton
+    DiamondButton,
+    PlusButton
 }

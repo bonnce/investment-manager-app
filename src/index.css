@@ -9,6 +9,14 @@
   padding:0
 }
 
+div,input,button{
+  transition: background-color 500ms ease, box-shadow 500ms ease;
+}
+
+h1,h2,h3,a{
+  transition: color 500ms ease;
+}
+
 body {
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Roboto','Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

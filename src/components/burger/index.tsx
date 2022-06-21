@@ -1,9 +1,9 @@
-import { Theme } from 'misc'
-import { useContext } from 'react'
-const Burger = ({icon, handleClick}:{icon:string, handleClick:VoidFunction})=>{
-const {theme} = useContext(Theme)
-return <div className="burger" onClick={handleClick}>
-    <img src={icon} alt="burger" className='icon' style={{filter:`invert(${theme.invert})`}} />
-</div>}
+import Icon from "./icon";
+import Icon2x2 from "./icon2x2";
+import ThemedIcon2x2 from "./themedIcon2x2";
 
-export default Burger
+export{
+    Icon,
+    Icon2x2,
+    ThemedIcon2x2
+}
