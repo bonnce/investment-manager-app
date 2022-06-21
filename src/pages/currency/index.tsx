@@ -1,13 +1,9 @@
-import { PlusButton } from "components";
 import { BasicAppPage } from "pages";
-import PurchaseCard from "./purchaseCard";
+import AddCard from "./addCard";
 
 const Currency = ({title} : {title:string}) =>{
     return <BasicAppPage title={title}>
-        <div className="container column gap-lg">
-                <PurchaseCard/>
-                <PlusButton />
-        </div>
+        <AddCard />
             </BasicAppPage>
 }
 

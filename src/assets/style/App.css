@@ -8,6 +8,10 @@
   flex-direction: column;
 }
 
+.gap-xsmr{
+  gap:.5rem
+}
+
 .gap-xsm{
   gap:.5em;
 }
@@ -68,6 +72,10 @@
   pointer-events: none;
 }
 
+.loading-icon{
+  animation: spin 750ms infinite linear;
+}
+
 .card{
   padding: 1.5em;
   border-radius: .75em;
@@ -109,6 +117,42 @@
   border-left: 1px solid black;
   border-right: 1px solid black;
   border-bottom: 1px solid #555;
+}
+
+.label-invisible-text{
+  font-size: 1rem;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.input-invisible-text{
+  font-size: 1em;
+  font-weight: inherit;
+  width: 100%;
+  background-color: transparent;
+  border:none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.input-invisible-text::placeholder{
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: .5em;
+  color:#848484;
+}
+
+.prefix-invisible-text{
+  font-size: 1em;
+  font-weight: inherit ;
+  width: min-content;
+}
+
+.invisible-input{
+  width: 100%;
 }
 
 .form-title{
@@ -195,17 +239,10 @@
   justify-content: flex-end;
 }
 
-.purchase-label{
-  font-size: 1em;
-  font-weight: 100;
-  text-transform: uppercase;
-  align-self: flex-start;
-}
-
 .cost{
   font-size: 4.5em;
   font-weight: 500;
-  width: 8ch;
+  width: 9ch;
   white-space: nowrap;
   overflow: hidden;
   text-overflow:clip;
@@ -215,13 +252,25 @@
   font-size: 2.75em;
   font-weight: 500;
   width: 12ch;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .usd{
   font-size: 2.25em;
   font-weight: 300;
   color: #848484;
+}
+
+@keyframes spin {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 436px) {
+  .card{
+    font-size: .8em;
+  }
 }

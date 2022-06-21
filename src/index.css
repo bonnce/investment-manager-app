@@ -30,4 +30,6 @@ code {
     monospace;
 }
 
-
+input{
+  font-family: inherit;
+}
