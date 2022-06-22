@@ -1,4 +1,6 @@
+import { IDBPDatabase } from 'idb'
 import React from 'react'
+import { iCurrencyDB } from './types'
 
 const themes = {
     light:{
@@ -19,9 +21,12 @@ const themes = {
     }
 }
 
+
 const Theme = React.createContext({theme:themes.light,setTheme:()=>{}})
+const Database = React.createContext<IDBPDatabase<iCurrencyDB>|null>(null)
 
 export{
     themes,
-    Theme
+    Theme,
+    Database
 }

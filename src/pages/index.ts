@@ -1,5 +1,5 @@
 import BasicAppPage from "./common/basicAppPage"
-import CurrencyManager from "./currencyManager"
+import CurrencyManager from "./CurrencyManager"
 import App from "./common/App"
 import Currency from "./currency"
 import Summary from "./summary"
