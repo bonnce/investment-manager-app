@@ -1,6 +1,6 @@
 import { Card, Form } from "components"
-import { Database, iCurrency, save } from "misc"
-import { FormEventHandler, useContext } from "react"
+import { Database, iCurrency, NAMECOLLCURRENCY, save } from "misc"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 const INPUTS = [{name:"name",label:'Nombre'}, {name:"shortName",label:'Apodo'}]
@@ -9,10 +9,9 @@ const AddCurrency = ()=>{
     const db = useContext(Database)
     const handleSubmit = async (formData:iCurrency)=>{
         if(db){
-            console.log(formData)
-            const result = await save(db,formData)
-            console.log(result)
-            // navigate('/')
+            const result = await save(db,NAMECOLLCURRENCY,formData)
+            alert(result)
+            navigate(0)
         }
     }
 return <Card>

@@ -1,5 +1,5 @@
 import { Theme } from "misc"
-import { ChangeEventHandler, useContext, useId, useState } from "react"
+import { ChangeEventHandler, useContext, useEffect, useId, useState } from "react"
 
 const InvisibleInput = ({name, label,onChange,className, defaultValue} : 
     {name:string,className?:string, label:string,onChange?:ChangeEventHandler<HTMLInputElement>,defaultValue:string})=>{
@@ -9,6 +9,11 @@ const InvisibleInput = ({name, label,onChange,className, defaultValue} :
         setValue(e.currentTarget.value)
         onChange?.(e)
     }
+
+    useEffect(()=>{
+        setValue(defaultValue)
+    },[defaultValue])
+
     const inputClassName = `container column align-start gap-xsmr ${className || ''}`
     const {theme} = useContext(Theme)
     return <div className={inputClassName}>

@@ -7,6 +7,7 @@ import { InputButton, InputText, InvisibleInput } from "./input";
 import Menu from "./menu";
 import Collapse from "./collapse";
 import { DiamondButton, PlusButton } from "./button";
+import Footer from "./footer";
 
 
 export {
@@ -24,5 +25,6 @@ export {
     DiamondButton,
     PlusButton,
     InvisibleInput,
-    LoadingIcon
+    LoadingIcon,
+    Footer
 }

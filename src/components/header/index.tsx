@@ -13,7 +13,7 @@ const Header = ({title}:{title:string})=> {
     boxShadow: `0 4px 4px 0 ${theme.shadow}`
   }}>
       <ThemedIcon2x2 icon={burger} alt='burger' handleClick={handleMenuClick} />
-      <h1>{title}</h1>
+      <h1 className="capitalize">{title}</h1>
       <div className="container theme-icon">
         <Icon2x2 icon={theme.invert==='0' ? cold : sun} alt={theme.invert==='0' ? 'cold' : 'sun'} handleClick={setTheme} />
       </div>

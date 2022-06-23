@@ -1,24 +1,24 @@
-import { Database, getAll } from "misc"
-import { iCurrency } from "misc/types"
+import { IDBPDatabase } from "idb"
+import { getAll, NAMECOLLCURRENCY } from "misc"
+import { iCurrency, iCurrencyDB } from "misc/types"
 import {Currency} from "pages"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Route } from "react-router-dom"
 
-const CurrencyRoutes = ()=>{
-    const db = useContext(Database)
+const CurrencyRoutes = (db:IDBPDatabase<iCurrencyDB>|null)=>{
     const [data,setData] = useState<iCurrency[] | null>(null)
     
     useEffect(()=>{
-        const getDB = async ()=>{
+        const getAllData = async ()=>{
             if(db){
-                const all = await getAll(db)
-                setData(all)
+                const rawData = await getAll(db,NAMECOLLCURRENCY) as iCurrency[]
+                setData(rawData)
             }
         }
-        getDB()
+        getAllData()
     },[db])
 
-    return data && data?.map((i)=><Route element={<Currency title={i.shortName}/>} />)
+    return data && data?.map((i)=><Route path={`/${i.shortName}`} key={i.id} element={<Currency id={i.id} title={i.name}/>} />)
 }
 
 export default CurrencyRoutes

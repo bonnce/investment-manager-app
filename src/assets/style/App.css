@@ -8,6 +8,14 @@
   flex-direction: column;
 }
 
+.uppercase{
+  text-transform: uppercase;
+}
+
+.capitalize{
+  text-transform: capitalize;
+}
+
 .gap-xsmr{
   gap:.5rem
 }
@@ -258,6 +266,34 @@
   font-size: 2.25em;
   font-weight: 300;
   color: #848484;
+}
+
+.footer{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 1em;
+  justify-content: flex-start;
+}
+
+.footer > *{
+  flex-basis: 100%;
+}
+
+.label-score{
+  font-size: 1.75em;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.total-score{
+  font-size: 3em;
+  font-weight: 500;
+}
+
+.purchase-button{
+  margin-bottom: 8em;
 }
 
 @keyframes spin {

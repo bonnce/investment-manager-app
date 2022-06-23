@@ -1,9 +1,13 @@
-const NAMECOLL = 'currencies'
 const NAMEDB = 'CurrencyDB'
-const INDEXDB = 'shortName'
+const NAMECOLLCURRENCY = 'currencies'
+const NAMECOLLSHOPPING = 'shopping'
+const INDEXCURRENCYDB = 'shortName'
+const INDEXSHOPPINGDB = 'currency'
 
 export{
-    NAMECOLL,
-    NAMEDB,
-    INDEXDB
+    NAMECOLLCURRENCY,
+    NAMECOLLSHOPPING,
+    INDEXCURRENCYDB,
+    INDEXSHOPPINGDB,
+    NAMEDB
 }

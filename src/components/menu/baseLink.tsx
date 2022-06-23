@@ -4,7 +4,8 @@ import { Link, LinkProps } from "react-router-dom";
 
 const BaseLink = (props:LinkProps) => {
     const {theme} = useContext(Theme)
-    const {children, ...restProps} = props
-    return <Link {...restProps} className="nav-link" style={{color:theme.text}}>{children}</Link>
+    const {children,className, ...restProps} = props
+    const newClassName = `nav-link ${className || ''}`
+    return <Link {...restProps} className={newClassName} style={{color:theme.text}}>{children}</Link>
 }
 export default BaseLink

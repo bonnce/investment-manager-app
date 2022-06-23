@@ -1,20 +1,27 @@
 import { IDBPDatabase, openDB } from "idb"
-import { iCurrency, iCurrencyDB } from "./types"
-import { INDEXDB, NAMECOLL } from "./const"
+import { iCurrency, iCurrencyDB, iShopping } from "./types"
+import { INDEXCURRENCYDB,INDEXSHOPPINGDB, NAMECOLLCURRENCY,NAMECOLLSHOPPING } from "./const"
 
 // create data base
 const createDB = async (nameDB:string)=>{
     try{
-        return openDB<iCurrencyDB>(nameDB,1,{
+        return openDB<iCurrencyDB>(nameDB,3,{
         upgrade(db, oldVersion, newVersion, transaction) {
             switch(oldVersion){
                 case 0:
                 case 1:
-                    const store = db.createObjectStore(NAMECOLL,{
+                case 2:
+                case 3:
+                    const storeCurrency = db.createObjectStore(NAMECOLLCURRENCY,{
                         autoIncrement: true,
                         keyPath: 'id'
                     })
-                    store.createIndex(INDEXDB,INDEXDB)
+                    storeCurrency.createIndex(INDEXCURRENCYDB,INDEXCURRENCYDB)
+                    const storeShopping = db.createObjectStore(NAMECOLLSHOPPING,{
+                        autoIncrement: true,
+                        keyPath: 'id'
+                    })
+                    storeShopping.createIndex(INDEXSHOPPINGDB,INDEXSHOPPINGDB)
             }
         }
     })
@@ -25,50 +32,61 @@ const createDB = async (nameDB:string)=>{
 }
 
 // get data from db
-const getAll = async (db:IDBPDatabase<iCurrencyDB>)=>{
+const getAll = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRENCY | typeof NAMECOLLSHOPPING)=>{
     try{
-        const tx = db.transaction(NAMECOLL,'readonly')
-        const store = tx.objectStore(NAMECOLL)
-        return store.getAll()
+        const tx = db.transaction(nameColl,'readonly')
+        const store = tx.objectStore(nameColl)
+        return await store.getAll() as unknown[]
     }catch(e){
         console.error('there is an error with getall method: ',e)
         return null
     }
 }
 
-const get = async (db:IDBPDatabase<iCurrencyDB>,index:typeof INDEXDB,nameItem:string)=>{
+const get = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRENCY | typeof NAMECOLLSHOPPING,req:number)=>{
     try{
-        return db.getFromIndex(NAMECOLL,index,nameItem)
+        const tx = db.transaction(nameColl,'readonly')
+        const store = tx.objectStore(nameColl)
+        return await store.get(req)
     }catch(e){
         console.error('there is an error with getall method: ',e)
         return null
     }
 }
+
+
 
 // add data to db
-const save = async (db:IDBPDatabase<iCurrencyDB>,item:iCurrency)=>{
-        const isInStore = await db.getFromIndex(NAMECOLL,INDEXDB,item.shortName)
-        if(isInStore) return {error:"alredy in the store"}
+const save = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRENCY | typeof NAMECOLLSHOPPING,item:iCurrency|iShopping)=>{
+    try{
+        const isInStore = item?.id && await get(db,nameColl,item.id)
+        if(isInStore) return "Already in database"
 
-        const tx = db.transaction(NAMECOLL,'readwrite')
-        const store = tx.objectStore(NAMECOLL)
 
-        await store.add(item)
-        return 'done'
+        const tx = db.transaction(nameColl,'readwrite')
+        const store = tx.objectStore(nameColl)
 
+        const key = await store.add(item)
+        await tx.done
+        return key
+    }catch(e){
+        console.error('there is an error with remove method: ',e)
+        return null
+    }
 }
 
 // remove data from db
-const remove = async (db:IDBPDatabase<iCurrencyDB>,key:number)=>{
+const remove = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRENCY | typeof NAMECOLLSHOPPING,key:number)=>{
     try{
-        const tx = db.transaction(NAMECOLL,'readwrite')
-        const store = tx.objectStore(NAMECOLL)
+        const tx = db.transaction(nameColl,'readwrite')
+        const store = tx.objectStore(nameColl)
 
         const isInStore = await store.get(key)
-        if(!isInStore) return {error:"not found item, cannot remove"}
+        if(!isInStore) return "not found item, cannot remove"
 
         await store.delete(key)
-        return tx.done
+        await tx.done
+        return 'done'
     }catch(e){
         console.error('there is an error with remove method: ',e)
         return null
@@ -76,16 +94,19 @@ const remove = async (db:IDBPDatabase<iCurrencyDB>,key:number)=>{
 }
 
 // update data from db
-const update = async (db:IDBPDatabase<iCurrencyDB>,item:iCurrency)=>{
+const update = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRENCY | typeof NAMECOLLSHOPPING, item:iCurrency|iShopping)=>{
     try{
-        const tx = db.transaction(NAMECOLL,'readwrite')
-        const store = tx.objectStore(NAMECOLL)
 
-        const isInStore = await db.getFromIndex(NAMECOLL,INDEXDB,item.shortName)
-        if(!isInStore) return {error:"not found item, cannot update"}
+        const isInStore = item?.id && await get(db,nameColl,item.id)
+        if(!isInStore) return "not found item, cannot update"
+
+
+        const tx = db.transaction(nameColl,'readwrite')
+        const store = tx.objectStore(nameColl)
 
         await store.put(item)
-        return tx.done
+        await tx.done
+        return 'done'
     }catch(e){
         console.error('there is an error with update method: ',e)
         return null

@@ -1,13 +1,14 @@
 import {themes,Theme, Database} from './context'
 import { createDB, get, getAll, save, remove, update } from './dbcontrol'
-import handleMenu from './handleMenu'
-import { NAMECOLL, NAMEDB, INDEXDB } from './const'
-import { iCurrency, iCurrencyDB } from './types'
+import {handleMenu,handleTotal} from './utils'
+import { NAMECOLLCURRENCY, NAMECOLLSHOPPING, INDEXCURRENCYDB,INDEXSHOPPINGDB,NAMEDB } from './const'
+import { iCurrency, iCurrencyDB, iShopping, iScore } from './types'
 
 export{
     themes,
     Theme,
     handleMenu,
+    handleTotal,
     createDB,
     get,
     getAll,
@@ -15,11 +16,15 @@ export{
     remove,
     update,
     Database,
-    NAMECOLL,
-    NAMEDB,
-    INDEXDB
+    NAMECOLLCURRENCY,
+    NAMECOLLSHOPPING,
+    INDEXCURRENCYDB,
+    INDEXSHOPPINGDB,
+    NAMEDB
 }
 export type{
     iCurrency,
-    iCurrencyDB
+    iCurrencyDB,
+    iShopping,
+    iScore
 }

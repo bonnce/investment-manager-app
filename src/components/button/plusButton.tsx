@@ -3,9 +3,9 @@ import { DiamondButton, Icon } from "components";
 import { useContext } from "react";
 import { Theme } from "misc";
 
-const PlusButton = ({onClick}:{onClick?:React.MouseEventHandler<HTMLButtonElement>})=>{
+const PlusButton = ({onClick, className}:{onClick?:React.MouseEventHandler<HTMLButtonElement>,className?:string})=>{
     const {theme} = useContext(Theme)
-    return <DiamondButton onClick={onClick}>
+    return <DiamondButton className={className} onClick={onClick}>
         <Icon icon={cross} alt='cross' style={{filter:`invert(${theme.invert})`}} />
     </DiamondButton>
 }

@@ -30,7 +30,7 @@ const App = ()=>{
                     <>
                     <Route index element={<CurrencyManager/>} />                
                     <Route path='/summary' element={<Summary/>} />
-                    {CurrencyRoutes}
+                    {CurrencyRoutes(db)}
                     </>
                 </Routes>
             </Router>
