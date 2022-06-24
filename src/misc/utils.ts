@@ -9,7 +9,10 @@ const handleTotal= (cost:string,bought:string)=>{
   return Math.round(parseFloat(cost) * parseFloat(bought) *100)/100
 }
 
+const leftRate = (top:number,bottom:number,x:number) => (top-x)/(top-bottom)
+
 export{
   handleTotal,
-  handleMenu
+  handleMenu,
+  leftRate
 } 

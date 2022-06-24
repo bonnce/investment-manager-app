@@ -12,6 +12,7 @@ const AddCard = ({id}:{id?:number}) =>{
         setScores(scores)
     }
     const memo = useMemo(()=>{
+        
         const totalBought = cards.reduce((t,c)=>{
             const bought = c.bought === '' ? 0 : parseFloat(c.bought)
             return bought+t
@@ -21,7 +22,7 @@ const AddCard = ({id}:{id?:number}) =>{
             return total+t  
         },0)
 
-        const stopLoss = Math.round((totalUSD/totalBought)*100)/100
+        const stopLoss = totalBought && Math.round((totalUSD/totalBought)*100)/100
 
         const scores = [{label:'gastado',total:totalUSD},{label:'salida',total:stopLoss}]
         return scores

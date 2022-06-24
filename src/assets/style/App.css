@@ -52,6 +52,7 @@
   height:min-content;
   padding: 2em;
   justify-content: flex-start;
+  z-index: 1;
 }
 
 .body{
@@ -172,7 +173,7 @@
   position:absolute;
   left:-36em;
   top:0;
-  z-index: 1;
+  z-index: 2;
   width: 31em;
   height: calc(100% - 4em);
   padding: 2em;
@@ -275,6 +276,7 @@
   left: 0;
   padding: 1em;
   justify-content: flex-start;
+  z-index: 1;
 }
 
 .footer > *{
@@ -296,6 +298,11 @@
   margin-bottom: 8em;
 }
 
+.pan-card > *{
+  user-select: none;
+  pointer-events: none;
+}
+
 @keyframes spin {
   from{
     transform: rotate(0deg);
@@ -306,7 +313,13 @@
 }
 
 @media (max-width: 436px) {
-  .card{
+  .card,footer{
     font-size: .8em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app{
+    font-size: 2.5em;
   }
 }

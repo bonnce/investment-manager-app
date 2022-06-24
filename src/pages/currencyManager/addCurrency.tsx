@@ -10,7 +10,6 @@ const AddCurrency = ()=>{
     const handleSubmit = async (formData:iCurrency)=>{
         if(db){
             const result = await save(db,NAMECOLLCURRENCY,formData)
-            alert(result)
             navigate(0)
         }
     }
