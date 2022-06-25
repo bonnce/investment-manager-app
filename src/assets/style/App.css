@@ -298,9 +298,14 @@
   margin-bottom: 8em;
 }
 
-.pan-card > *{
-  user-select: none;
-  pointer-events: none;
+.purchase-card{
+  user-select:none;
+  pointer-events:fill;
+  cursor:auto;
+}
+
+.pan-card{
+  cursor: move;
 }
 
 @keyframes spin {
@@ -318,8 +323,8 @@
   }
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 2048px) {
   .app{
-    font-size: 2.5em;
+    font-size: 1.2em;
   }
-}
+} */

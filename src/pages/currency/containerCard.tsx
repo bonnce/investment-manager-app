@@ -11,6 +11,7 @@ const AddCard = ({id}:{id?:number}) =>{
     const handleScore = (scores:iScore[])=>{
         setScores(scores)
     }
+
     const memo = useMemo(()=>{
         
         const totalBought = cards.reduce((t,c)=>{
@@ -60,7 +61,7 @@ const AddCard = ({id}:{id?:number}) =>{
 
     
     return <div className="container column gap-lg">
-                {cards.map((d,i)=><PurchaseCard currency={data} actual={d} index={i} key={i} />)}
+                {cards.map((d,i)=><PurchaseCard currency={data} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}
                 <PlusButton className="purchase-button" onClick={handleClick} />
                 <Footer scores={scores} />
         </div>

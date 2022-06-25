@@ -1,9 +1,10 @@
-import { Card, InvisibleInput, LoadingIcon } from "components"
+import { InvisibleInput, LoadingIcon } from "components"
 import { ChangeEventHandler, useContext, useEffect, useState, useTransition } from "react"
-import { iCurrency, update, Database, iShopping, NAMECOLLSHOPPING, handleTotal } from "misc"
+import { iCurrency, update, Database, iShopping, NAMECOLLSHOPPING, handleTotal, remove, NAMECOLLCURRENCY } from "misc"
+import PanCard from "components/card/panCard"
 
 
-const PurchaseCard = ({currency,actual,index} : {currency?:iCurrency,actual:iShopping,index:number})=>{
+const PurchaseCard = ({currency,actual} : {currency?:iCurrency,actual:iShopping})=>{
     const db = useContext(Database)
     const [cost, setCost] = useState(actual?.cost || '')
     const [bought, setBought] = useState(actual?.bought  || '')
@@ -17,6 +18,15 @@ const PurchaseCard = ({currency,actual,index} : {currency?:iCurrency,actual:iSho
         }
     }
 
+    const handleDelete = async ()=>{
+        if(db && currency && actual.id){
+            const resultDelete = await remove(db,NAMECOLLSHOPPING,actual.id)
+            const messi = currency.shopping.filter(i=> actual.id !== i)
+            const newCurrency = {...currency,shopping:messi}
+            const resultCurrency = await update(db,NAMECOLLCURRENCY,newCurrency)
+            console.log(resultCurrency,resultDelete)
+        }
+    }
     
 
     const handleChange:ChangeEventHandler<HTMLInputElement> = (e) =>{
@@ -41,7 +51,7 @@ const PurchaseCard = ({currency,actual,index} : {currency?:iCurrency,actual:iSho
         setTotal(handleTotal(cost,bought))
     },[cost,bought])
 
-    return <Card>
+    return <PanCard onDeadZone={handleDelete}>
             <div className="container gap-sm purchase-card">
                 <InvisibleInput defaultValue={cost} name='cost' label="precio comprado" className="cost" onChange={handleChange} />
                 <div className="container column align-start">
@@ -49,7 +59,7 @@ const PurchaseCard = ({currency,actual,index} : {currency?:iCurrency,actual:iSho
                     {isPending ? <LoadingIcon /> :<h6 className="usd">{total && `~$ ${total}`}</h6>}
                 </div>
             </div>    
-        </Card>
+        </PanCard>
 }
 
 export default PurchaseCard
