@@ -1,4 +1,5 @@
 import { Footer, PlusButton } from "components";
+import DangerLines from "components/card/dangerLines";
 import { Database, get, iCurrency, NAMECOLLCURRENCY, iShopping, update, INDEXSHOPPINGDB, NAMECOLLSHOPPING, save, iScore, handleTotal } from "misc";
 import { useContext, useEffect, useMemo, useState } from "react";
 import PurchaseCard from "./purchaseCard";
@@ -8,8 +9,14 @@ const AddCard = ({id}:{id?:number}) =>{
     const [data,setData] = useState<iCurrency | undefined>(undefined)
     const [cards,setCards] = useState<iShopping[]>([])
     const [scores,setScores] = useState<Array<iScore>>([])
+    const [isDrag,setIsDrag] = useState(false)
+
     const handleScore = (scores:iScore[])=>{
         setScores(scores)
+    }
+
+    const handleDrag = (drag:boolean)=>{
+        setIsDrag(drag)
     }
 
     const memo = useMemo(()=>{
@@ -61,9 +68,17 @@ const AddCard = ({id}:{id?:number}) =>{
 
     
     return <div className="container column gap-lg">
-                {cards.map((d,i)=><PurchaseCard currency={data} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}
-                <PlusButton className="purchase-button" onClick={handleClick} />
-                <Footer scores={scores} />
+
+            {isDrag &&
+            <>
+                <DangerLines  />
+                {/* <DangerLines left={false} /> */}
+            </>
+            }
+
+            {cards.map((d,i)=><PurchaseCard currency={data} isDraggin={handleDrag} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}
+            <PlusButton className="purchase-button" onClick={handleClick} />
+            <Footer scores={scores} />
         </div>
 }
 

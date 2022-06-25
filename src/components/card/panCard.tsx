@@ -1,23 +1,24 @@
 import { leftRate, Theme, useWindowDimensions } from "misc"
 import React, { useContext, useEffect, useRef, useState } from "react"
+import DangerLines from "./dangerLines"
 
-const PanCard = ({children, onDeadZone} : {children:React.ReactNode, onDeadZone?:VoidFunction})=>{
+const PanCard = ({children, onDeadZone, isDraggin} : {children:React.ReactNode, onDeadZone?:VoidFunction, isDraggin:(d:boolean)=>void})=>{
     const {theme} = useContext(Theme)
     const {width, height} = useWindowDimensions()
     const panRef = useRef<HTMLDivElement>(null)
     const [isDrag,setIsDrag] = useState(false)
-
+    
 
     useEffect(()=>{
         const zoom = (target:HTMLDivElement,clientX:number,clientY:number)=>{
             if(target.dataset.drag){   
                 const targetWidth = target.getBoundingClientRect().width
                 const targetHeight = target.getBoundingClientRect().height
-
+                                
                 target.style.position = 'absolute'
                 target.style.top = `${clientY-(targetHeight/2)}px`
                 target.style.left = `${clientX-(width - (width-(targetWidth/2)))}px`
-
+                target.style.zIndex = '2'
                 target.style.transform = 'scale(1.2)'
             }
         }
@@ -56,6 +57,7 @@ const PanCard = ({children, onDeadZone} : {children:React.ReactNode, onDeadZone?
                 target.style.position = 'static'
                 target.style.left = '0'
                 target.style.transform = 'none'
+                target.style.zIndex = '0'
             }
         }
     
@@ -73,6 +75,7 @@ const PanCard = ({children, onDeadZone} : {children:React.ReactNode, onDeadZone?
     
         const handleTouchEnd = (e:TouchEvent)=>{
             setIsDrag(false)
+            isDraggin(false)
             
             const target = e.target as HTMLDivElement
             const touch = e.changedTouches[0]
@@ -87,12 +90,14 @@ const PanCard = ({children, onDeadZone} : {children:React.ReactNode, onDeadZone?
             const touch = e.changedTouches[0]
             zoom(target,touch.clientX,touch.clientY)
             setIsDrag(true)
+            isDraggin(true)
         }
         const handleMouseMove = (ev: MouseEvent)=>{
             const t = ev.target as HTMLDivElement
             drag(t,ev.clientX,ev.clientY)
         }
         const handleMouseDownEvent = (e:MouseEvent)=>{
+            isDraggin(true)
             setIsDrag(true)
             const target = e.target as HTMLDivElement
             target.childNodes.forEach(c=>{
@@ -104,6 +109,7 @@ const PanCard = ({children, onDeadZone} : {children:React.ReactNode, onDeadZone?
         
         const handleMouseLeavesEvent = (e:MouseEvent)=>{
             setIsDrag(false)
+            isDraggin(false)
             const target = e.target as HTMLDivElement
             target.childNodes.forEach(c=>{
                 const child = c as HTMLElement

@@ -4,19 +4,19 @@ import { iCurrencyDB } from './types'
 
 const themes = {
     light:{
-        'sixty' : "#FFF9BF",
-        'thirty' : "#FFCC6F",
-        'ten' : "#FF2D2D",
+        'sixty' : "#fffce6",
+        'thirty' : "#ffe4b3",
+        'ten' : "#ff8c1a",
         'text' : "#000000",
-        'shadow' : "#FF2D2D48",
+        'shadow' : "#ff8c1a48",
         'invert' : "0",
     },
     dark:{
         'sixty' : "#110B50",
         'thirty' : "#3C5095",
-        'ten' : "#2BE5F1",
+        'ten' : "#0cb4c0",
         'text' : "#FFFFFF",
-        'shadow' : "#3C5095B0",
+        'shadow' : "#0cb4c0B0",
         'invert' : "1",
     }
 }

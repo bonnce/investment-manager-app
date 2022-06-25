@@ -1,10 +1,10 @@
 import { InvisibleInput, LoadingIcon } from "components"
 import { ChangeEventHandler, useContext, useEffect, useState, useTransition } from "react"
 import { iCurrency, update, Database, iShopping, NAMECOLLSHOPPING, handleTotal, remove, NAMECOLLCURRENCY } from "misc"
-import PanCard from "components/card/panCard"
+import { PanCard } from "components"
 
 
-const PurchaseCard = ({currency,actual} : {currency?:iCurrency,actual:iShopping})=>{
+const PurchaseCard = ({currency,actual, isDraggin} : {currency?:iCurrency,actual:iShopping, isDraggin:(d:boolean)=>void})=>{
     const db = useContext(Database)
     const [cost, setCost] = useState(actual?.cost || '')
     const [bought, setBought] = useState(actual?.bought  || '')
@@ -51,7 +51,7 @@ const PurchaseCard = ({currency,actual} : {currency?:iCurrency,actual:iShopping}
         setTotal(handleTotal(cost,bought))
     },[cost,bought])
 
-    return <PanCard onDeadZone={handleDelete}>
+    return <PanCard onDeadZone={handleDelete} isDraggin={isDraggin}>
             <div className="container gap-sm purchase-card">
                 <InvisibleInput defaultValue={cost} name='cost' label="precio comprado" className="cost" onChange={handleChange} />
                 <div className="container column align-start">

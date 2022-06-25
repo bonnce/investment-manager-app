@@ -115,17 +115,12 @@
   padding-top: .2em;
   padding-bottom: .2em; 
   border-radius: .25em;
-  border-bottom: 2px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-top: 1px solid #555;
+  border: none;
+  transition: background-color 100ms ease, box-shadow 100ms ease ;
 }
 
 .input-button:active{
-  border-top: 2px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 1px solid #555;
+  transition: background-color 100ms ease, box-shadow 100ms ease ;
 }
 
 .label-invisible-text{
@@ -306,6 +301,17 @@
 
 .pan-card{
   cursor: move;
+}
+
+.danger-lines{
+  position: absolute;
+  top:0;
+  height: 100vh;
+  width: 80vw;
+  user-select: none;
+  pointer-events: none;
+  z-index: 3;
+  opacity: .8;
 }
 
 @keyframes spin {
