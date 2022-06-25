@@ -314,6 +314,28 @@
   opacity: .8;
 }
 
+.trash-zone{
+  position: absolute;
+  top:0;
+  height: 100vh;
+  width: 10vw;
+  /* user-select: none;
+  pointer-events: none; */
+  z-index: 3;
+  background-color: #0008;
+  opacity: .8;
+}
+
+.trash-icon{
+  transition: opacity 500ms ease;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  user-select: none;
+  pointer-events: none;
+}
+
 @keyframes spin {
   from{
     transform: rotate(0deg);

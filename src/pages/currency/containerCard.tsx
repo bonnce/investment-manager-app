@@ -1,4 +1,5 @@
 import { Footer, PlusButton } from "components";
+import { TrashZone } from "components/card";
 import DangerLines from "components/card/dangerLines";
 import { Database, get, iCurrency, NAMECOLLCURRENCY, iShopping, update, INDEXSHOPPINGDB, NAMECOLLSHOPPING, save, iScore, handleTotal } from "misc";
 import { useContext, useEffect, useMemo, useState } from "react";
@@ -71,11 +72,13 @@ const AddCard = ({id}:{id?:number}) =>{
 
             {isDrag &&
             <>
-                <DangerLines  />
+                {/* <DangerLines  /> */}
                 {/* <DangerLines left={false} /> */}
+
             </>
             }
-
+                <TrashZone />
+                <TrashZone left/>
             {cards.map((d,i)=><PurchaseCard currency={data} isDraggin={handleDrag} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}
             <PlusButton className="purchase-button" onClick={handleClick} />
             <Footer scores={scores} />

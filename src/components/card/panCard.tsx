@@ -1,6 +1,5 @@
 import { leftRate, Theme, useWindowDimensions } from "misc"
 import React, { useContext, useEffect, useRef, useState } from "react"
-import DangerLines from "./dangerLines"
 
 const PanCard = ({children, onDeadZone, isDraggin} : {children:React.ReactNode, onDeadZone?:VoidFunction, isDraggin:(d:boolean)=>void})=>{
     const {theme} = useContext(Theme)
