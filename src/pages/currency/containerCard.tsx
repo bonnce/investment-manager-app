@@ -5,7 +5,7 @@ import { Database, get, iCurrency, NAMECOLLCURRENCY, iShopping, update, INDEXSHO
 import { useContext, useEffect, useMemo, useState } from "react";
 import PurchaseCard from "./purchaseCard";
 
-const AddCard = ({id}:{id?:number}) =>{
+const ContainerCard = ({id}:{id?:number}) =>{
     const db = useContext(Database)
     const [data,setData] = useState<iCurrency | undefined>(undefined)
     const [cards,setCards] = useState<iShopping[]>([])
@@ -85,4 +85,4 @@ const AddCard = ({id}:{id?:number}) =>{
         </div>
 }
 
-export default AddCard
+export default ContainerCard
