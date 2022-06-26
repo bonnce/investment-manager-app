@@ -8,7 +8,7 @@ import Menu from "./menu";
 import Collapse from "./collapse";
 import { DiamondButton, PlusButton } from "./button";
 import Footer from "./footer";
-
+import { DangerLines, TrashZone } from "./dangerZone";
 
 export {
     Header,
@@ -27,5 +27,7 @@ export {
     PlusButton,
     InvisibleInput,
     LoadingIcon,
-    Footer
+    Footer,
+    DangerLines,
+    TrashZone
 }

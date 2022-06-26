@@ -1,7 +1,8 @@
 import { leftRate, Theme, useWindowDimensions } from "misc"
 import React, { useContext, useEffect, useRef, useState } from "react"
 
-const PanCard = ({children, onDeadZone, isDraggin} : {children:React.ReactNode, onDeadZone?:VoidFunction, isDraggin:(d:boolean)=>void})=>{
+const PanCard = ({children, onDeadZone, isDraggin, isInDZ} : 
+    {children:React.ReactNode, onDeadZone?:VoidFunction, isDraggin:(d:boolean)=>void, isInDZ:(str?:'left'|'right')=>void})=>{
     const {theme} = useContext(Theme)
     const {width, height} = useWindowDimensions()
     const panRef = useRef<HTMLDivElement>(null)
@@ -24,6 +25,7 @@ const PanCard = ({children, onDeadZone, isDraggin} : {children:React.ReactNode, 
     
         const drag = (target:HTMLDivElement,clientX:number,clientY:number) =>{
             if(isDrag && target.dataset.drag){
+                isInDZ()
                 const body = document.querySelector('.body') as HTMLDivElement
                 body.style.overflow = 'hidden'
                 const targetHeight = target.getBoundingClientRect().height
@@ -33,17 +35,29 @@ const PanCard = ({children, onDeadZone, isDraggin} : {children:React.ReactNode, 
                 target.style.left = `${clientX-(width - (width-(targetWidth/2)))}px`
 
                 
-                const topDeadZone = width * 0.7 
-                const bottomDeadZone = width * 0.3
-                
+                const topDangerZone = width * 0.7 
+                const bottomDangerZone = width * 0.3
+
+                const topDeadZone = width * 0.85
+                const bottomDeadZone = width * 0.15
+
                 if(topDeadZone < clientX){
-                    const opacity = leftRate(width*0.9,topDeadZone,clientX)
-                    target.style.opacity = `${opacity}`
+                    isInDZ('right')
                 }
                 if(bottomDeadZone > clientX){
-                    const opacity = leftRate(width*0.1,bottomDeadZone,clientX)
+                    isInDZ('left')
+                }
+                
+                if(topDangerZone < clientX){
+                    const opacity = leftRate(width*0.9,topDangerZone,clientX)
                     target.style.opacity = `${opacity}`
                 }
+                if(bottomDangerZone > clientX){
+                    const opacity = leftRate(width*0.1,bottomDangerZone,clientX)
+                    target.style.opacity = `${opacity}`
+                }
+
+
             }
         }
     

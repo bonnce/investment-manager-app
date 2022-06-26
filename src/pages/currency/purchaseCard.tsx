@@ -4,7 +4,8 @@ import { iCurrency, update, Database, iShopping, NAMECOLLSHOPPING, handleTotal, 
 import { PanCard } from "components"
 
 
-const PurchaseCard = ({currency,actual, isDraggin} : {currency?:iCurrency,actual:iShopping, isDraggin:(d:boolean)=>void})=>{
+const PurchaseCard = ({currency,actual, isDraggin, isInDZ} : 
+    {currency?:iCurrency,actual:iShopping, isDraggin:(d:boolean)=>void, isInDZ:(str?:'left'|'right')=>void})=>{
     const db = useContext(Database)
     const [cost, setCost] = useState(actual?.cost || '')
     const [bought, setBought] = useState(actual?.bought  || '')
@@ -51,7 +52,7 @@ const PurchaseCard = ({currency,actual, isDraggin} : {currency?:iCurrency,actual
         setTotal(handleTotal(cost,bought))
     },[cost,bought])
 
-    return <PanCard onDeadZone={handleDelete} isDraggin={isDraggin}>
+    return <PanCard onDeadZone={handleDelete} isDraggin={isDraggin} isInDZ={isInDZ}>
             <div className="container gap-sm purchase-card">
                 <InvisibleInput defaultValue={cost} name='cost' label="precio comprado" className="cost" onChange={handleChange} />
                 <div className="container column align-start">

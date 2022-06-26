@@ -1,6 +1,5 @@
 import { Footer, PlusButton } from "components";
-import { TrashZone } from "components/card";
-import DangerLines from "components/card/dangerLines";
+import { TrashZone } from "components";
 import { Database, get, iCurrency, NAMECOLLCURRENCY, iShopping, update, INDEXSHOPPINGDB, NAMECOLLSHOPPING, save, iScore, handleTotal } from "misc";
 import { useContext, useEffect, useMemo, useState } from "react";
 import PurchaseCard from "./purchaseCard";
@@ -11,6 +10,7 @@ const ContainerCard = ({id}:{id?:number}) =>{
     const [cards,setCards] = useState<iShopping[]>([])
     const [scores,setScores] = useState<Array<iScore>>([])
     const [isDrag,setIsDrag] = useState(false)
+    const [dangerZone,setDZ] = useState<undefined | 'left' | 'right'>(undefined)
 
     const handleScore = (scores:iScore[])=>{
         setScores(scores)
@@ -18,6 +18,10 @@ const ContainerCard = ({id}:{id?:number}) =>{
 
     const handleDrag = (drag:boolean)=>{
         setIsDrag(drag)
+    }
+
+    const handleDangerZone = (str?:'left' | 'right')=>{
+        setDZ(str)
     }
 
     const memo = useMemo(()=>{
@@ -74,12 +78,13 @@ const ContainerCard = ({id}:{id?:number}) =>{
             <>
                 {/* <DangerLines  /> */}
                 {/* <DangerLines left={false} /> */}
-
+                <TrashZone close={dangerZone === 'right'} />
+                <TrashZone left close={dangerZone === 'left'}/>
             </>
             }
-                <TrashZone />
-                <TrashZone left/>
-            {cards.map((d,i)=><PurchaseCard currency={data} isDraggin={handleDrag} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}
+                
+            {cards.map((d,i)=><PurchaseCard currency={data} isInDZ={handleDangerZone} 
+            isDraggin={handleDrag} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}
             <PlusButton className="purchase-button" onClick={handleClick} />
             <Footer scores={scores} />
         </div>
