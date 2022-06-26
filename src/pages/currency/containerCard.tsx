@@ -74,14 +74,8 @@ const ContainerCard = ({id}:{id?:number}) =>{
     
     return <div className="container column gap-lg">
 
-            {isDrag &&
-            <>
-                {/* <DangerLines  /> */}
-                {/* <DangerLines left={false} /> */}
-                <TrashZone close={dangerZone === 'right'} />
-                <TrashZone left close={dangerZone === 'left'}/>
-            </>
-            }
+            <TrashZone display={isDrag} close={dangerZone === 'right'} />
+            <TrashZone display={isDrag} left close={dangerZone === 'left'}/>
                 
             {cards.map((d,i)=><PurchaseCard currency={data} isInDZ={handleDangerZone} 
             isDraggin={handleDrag} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}

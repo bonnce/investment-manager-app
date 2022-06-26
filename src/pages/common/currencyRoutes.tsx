@@ -18,7 +18,7 @@ const CurrencyRoutes = (db:IDBPDatabase<iCurrencyDB>|null)=>{
         getAllData()
     },[db])
 
-    return data && data?.map((i)=><Route path={`/${i.shortName}`} key={i.id} element={<Currency id={i.id} title={i.name}/>} />)
+    return data && data?.map((i)=><Route path={`/${i.shortName}`} key={`/${i.shortName}-${i.id}`} element={<Currency id={i.id} key={`/${i.shortName}-${i.id}`} title={i.name}/>} />)
 }
 
 export default CurrencyRoutes

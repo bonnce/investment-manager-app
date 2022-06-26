@@ -324,7 +324,7 @@
   z-index: 3;
   background-color: #0008;
   opacity: 0;
-  animation: in 500ms ease forwards;
+  /* display: none; */
 }
 
 .trash-icon{
@@ -338,8 +338,19 @@
   pointer-events: none;
 }
 
+@keyframes out {
+  from{
+    opacity: .8;
+  }
+  to{
+    opacity: 0;
+    display: none;
+  }
+}
+
 @keyframes in {
   from{
+    display: block;
     opacity: 0;
   }
   to{
