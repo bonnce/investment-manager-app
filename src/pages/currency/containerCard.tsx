@@ -1,7 +1,7 @@
 import { Footer, PlusButton } from "components";
-import { TrashZone } from "components";
 import { Database, get, iCurrency, NAMECOLLCURRENCY, iShopping, update, INDEXSHOPPINGDB, NAMECOLLSHOPPING, save, iScore, handleTotal } from "misc";
 import { useContext, useEffect, useMemo, useState } from "react";
+import DangerZoneDraggin from "./dangerZoneDraggin";
 import PurchaseCard from "./purchaseCard";
 
 const ContainerCard = ({id}:{id?:number}) =>{
@@ -9,8 +9,9 @@ const ContainerCard = ({id}:{id?:number}) =>{
     const [data,setData] = useState<iCurrency | undefined>(undefined)
     const [cards,setCards] = useState<iShopping[]>([])
     const [scores,setScores] = useState<Array<iScore>>([])
-    const [isDrag,setIsDrag] = useState(false)
+    const [isDrag,setIsDrag] = useState<boolean | null>(null)
     const [dangerZone,setDZ] = useState<undefined | 'left' | 'right'>(undefined)
+    const [loading, setLoading] = useState(false)
 
     const handleScore = (scores:iScore[])=>{
         setScores(scores)
@@ -44,10 +45,10 @@ const ContainerCard = ({id}:{id?:number}) =>{
     const handleClick = async ()=>{
 		if(db && data){
 			const newShopping = {cost:'',bought:'',currency:data.id}
-			setCards(c=> [...c,newShopping])
 			const resultShopping = await save(db,NAMECOLLSHOPPING,newShopping)
 			if(typeof resultShopping === 'number'){
-				const newCurrency = {...data, shopping: [...data.shopping,resultShopping]}
+                setCards(c=> [...c,{...newShopping,id:resultShopping}])
+                const newCurrency = {...data, shopping: [...data.shopping,resultShopping]}
 				const result = await update(db,NAMECOLLCURRENCY,newCurrency)
 			}
 		} 
@@ -60,10 +61,8 @@ const ContainerCard = ({id}:{id?:number}) =>{
             if(db && id){
                 const rawDataCurrency = await get(db,NAMECOLLCURRENCY,id) as iCurrency
                 setData(rawDataCurrency)
-				if(rawDataCurrency.shopping.length > 0){
-					const rawDataShopping = await db.getAllFromIndex(NAMECOLLSHOPPING,INDEXSHOPPINGDB,id) as iShopping[]
-					setCards(rawDataShopping)
-				}
+                const rawDataShopping = await db.getAllFromIndex(NAMECOLLSHOPPING,INDEXSHOPPINGDB,id) as iShopping[]
+                setCards(rawDataShopping)
 			}
         }
         getData()
@@ -73,12 +72,13 @@ const ContainerCard = ({id}:{id?:number}) =>{
 
     
     return <div className="container column gap-lg">
-
-            <TrashZone display={isDrag} close={dangerZone === 'right'} />
-            <TrashZone display={isDrag} left close={dangerZone === 'left'}/>
-                
+        
+            <DangerZoneDraggin isDragging={isDrag} dangerZone={dangerZone} />
+            {loading && <p>
+                loading...
+            </p>}
             {cards.map((d,i)=><PurchaseCard currency={data} isInDZ={handleDangerZone} 
-            isDraggin={handleDrag} actual={d} key={`${d.id}-${d.bought}-${i}`} />)}
+            isDraggin={handleDrag} actual={d} key={`${d.id}-${i}`} />)}
             <PlusButton className="purchase-button" onClick={handleClick} />
             <Footer scores={scores} />
         </div>

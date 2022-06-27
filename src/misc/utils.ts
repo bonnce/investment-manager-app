@@ -11,8 +11,11 @@ const handleTotal= (cost:string,bought:string)=>{
 
 const leftRate = (top:number,bottom:number,x:number) => (top-x)/(top-bottom)
 
+const timeout = async (ms:number) => await new Promise(r => setTimeout(r,ms)) 
+
 export{
   handleTotal,
   handleMenu,
-  leftRate
+  leftRate,
+  timeout
 } 

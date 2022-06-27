@@ -323,12 +323,10 @@
   pointer-events: none;
   z-index: 3;
   background-color: #0008;
-  opacity: 0;
-  /* display: none; */
 }
 
 .trash-icon{
-  transition: opacity 100ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
   position: absolute;
   width: 100%;
   left: 50%;
@@ -338,19 +336,25 @@
   pointer-events: none;
 }
 
+.fade-in{
+  animation: in 500ms ease forwards;
+}
+
+.fade-out{
+  animation: out 500ms ease forwards;
+}
+
 @keyframes out {
   from{
     opacity: .8;
   }
   to{
     opacity: 0;
-    display: none;
   }
 }
 
 @keyframes in {
   from{
-    display: block;
     opacity: 0;
   }
   to{

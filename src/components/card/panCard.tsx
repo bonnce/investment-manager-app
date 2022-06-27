@@ -6,12 +6,14 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
     const {theme} = useContext(Theme)
     const {width, height} = useWindowDimensions()
     const panRef = useRef<HTMLDivElement>(null)
-    const [isDrag,setIsDrag] = useState(false)
+    const [isDrag,setIsDrag] = useState<boolean | null>(null)
     
 
     useEffect(()=>{
         const zoom = (target:HTMLDivElement,clientX:number,clientY:number)=>{
-            if(target.dataset.drag){   
+            if(target.dataset.drag){ 
+                isDraggin(true)
+                setIsDrag(true)  
                 const targetWidth = target.getBoundingClientRect().width
                 const targetHeight = target.getBoundingClientRect().height
                                 
@@ -63,6 +65,8 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
     
         const reset = (target:HTMLDivElement) => {
             if( target.dataset.drag){
+                setIsDrag(false)
+                isDraggin(false)
                 const body = document.querySelector('.body') as HTMLDivElement
                 body.style.overflowY = 'auto'
                 
@@ -75,8 +79,8 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
         }
     
         const inDeadZone = (clientX:number) =>{
-            const topDeadZone = width * 0.9
-            const bottomDeadZone = width * 0.1
+            const topDeadZone = width * 0.85
+            const bottomDeadZone = width * 0.15
             return clientX > topDeadZone || clientX < bottomDeadZone
         }
     
@@ -87,8 +91,6 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
         }
     
         const handleTouchEnd = (e:TouchEvent)=>{
-            setIsDrag(false)
-            isDraggin(false)
             
             const target = e.target as HTMLDivElement
             const touch = e.changedTouches[0]
@@ -102,16 +104,12 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
             const target = e.target as HTMLDivElement
             const touch = e.changedTouches[0]
             zoom(target,touch.clientX,touch.clientY)
-            setIsDrag(true)
-            isDraggin(true)
         }
         const handleMouseMove = (ev: MouseEvent)=>{
             const t = ev.target as HTMLDivElement
             drag(t,ev.clientX,ev.clientY)
         }
         const handleMouseDownEvent = (e:MouseEvent)=>{
-            isDraggin(true)
-            setIsDrag(true)
             const target = e.target as HTMLDivElement
             target.childNodes.forEach(c=>{
                 const child = c as HTMLElement
@@ -121,8 +119,7 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
         }
         
         const handleMouseLeavesEvent = (e:MouseEvent)=>{
-            setIsDrag(false)
-            isDraggin(false)
+
             const target = e.target as HTMLDivElement
             target.childNodes.forEach(c=>{
                 const child = c as HTMLElement
@@ -137,12 +134,14 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
         if(panRef.current){
             panRef.current.addEventListener('mousedown',handleMouseDownEvent)
             panRef.current.addEventListener('mousemove',handleMouseMove)
-            panRef.current.addEventListener('mouseup',handleMouseLeavesEvent)
-            panRef.current.addEventListener('mouseleave',handleMouseLeavesEvent)
+            isDrag === null || (() =>{
+                panRef.current.addEventListener('mouseup',handleMouseLeavesEvent)
+                panRef.current.addEventListener('mouseleave',handleMouseLeavesEvent)
+                panRef.current.addEventListener('touchcancel',handleTouchEnd)
+                panRef.current.addEventListener('touchend',handleTouchEnd)   
+            })()
             panRef.current.addEventListener('touchstart',handleTouchStart)
             panRef.current.addEventListener('touchmove',handleTouchMove)
-            panRef.current.addEventListener('touchcancel',handleTouchEnd)
-            panRef.current.addEventListener('touchend',handleTouchEnd)
         }
         return ()=>{
             if(actualRef.current){
@@ -157,7 +156,7 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
             }
             document.removeEventListener('mousemove',handleMouseMove)
         }
-    },[panRef.current,isDrag,width,height])
+    },[panRef.current,isDrag,width,height, onDeadZone])
 
     return <div ref={panRef} className="container card pan-card" data-drag={true}
     style={{backgroundColor: theme.thirty, boxShadow: `0 2px 2px 0 ${theme.ten}80, 0 4px 4px 0 ${theme.thirty}`, 

@@ -25,7 +25,6 @@ const PurchaseCard = ({currency,actual, isDraggin, isInDZ} :
             const messi = currency.shopping.filter(i=> actual.id !== i)
             const newCurrency = {...currency,shopping:messi}
             const resultCurrency = await update(db,NAMECOLLCURRENCY,newCurrency)
-            console.log(resultCurrency,resultDelete)
         }
     }
     
