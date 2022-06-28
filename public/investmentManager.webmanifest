@@ -170,6 +170,12 @@
       "purpose": "maskable"
     },
     {
+      "src": "logo1024mask.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "maskable"
+    },
+    {
       "src": "logo1024.png",
       "type": "image/png",
       "sizes": "1024x1024"
