@@ -1,0 +1,187 @@
+{
+  "short_name": "IMA",
+  "name": "Investment Manager App",
+  "icons": [
+    {
+      "src": "logo16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "logo20.png",
+      "type": "image/png",
+      "sizes": "20x20"
+    },
+    {
+      "src": "logo29.png",
+      "type": "image/png",
+      "sizes": "29x29"
+    },
+    {
+      "src": "logo32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "logo40.png",
+      "type": "image/png",
+      "sizes": "40x40"
+    },
+    {
+      "src": "logo48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "logo50.png",
+      "type": "image/png",
+      "sizes": "50x50"
+    },
+
+    {
+      "src": "logo55.png",
+      "type": "image/png",
+      "sizes": "55x55"
+    },
+    {
+      "src": "logo57.png",
+      "type": "image/png",
+      "sizes": "57x57"
+    },
+    {
+      "src": "logo58.png",
+      "type": "image/png",
+      "sizes": "58x58"
+    },
+    {
+      "src": "logo60.png",
+      "type": "image/png",
+      "sizes": "60x60"
+    },
+    {
+      "src": "logo64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "logo72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "logo76.png",
+      "type": "image/png",
+      "sizes": "76x76"
+    },
+    {
+      "src": "logo80.png",
+      "type": "image/png",
+      "sizes": "80x80"
+    },
+    {
+      "src": "logo87.png",
+      "type": "image/png",
+      "sizes": "87x87"
+    },
+    {
+      "src": "logo88.png",
+      "type": "image/png",
+      "sizes": "88x88"
+    },
+    {
+      "src": "logo96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "logo100.png",
+      "type": "image/png",
+      "sizes": "100x100"
+    },
+    {
+      "src": "logo114.png",
+      "type": "image/png",
+      "sizes": "114x114"
+    },
+    {
+      "src": "logo120.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "logo128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "logo144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "logo152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "logo167.png",
+      "type": "image/png",
+      "sizes": "167x167"
+    },
+    {
+      "src": "logo172.png",
+      "type": "image/png",
+      "sizes": "172x172"
+    },
+    {
+      "src": "logo180.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo196.png",
+      "type": "image/png",
+      "sizes": "196x196"
+    },
+    {
+      "src": "logo216.png",
+      "type": "image/png",
+      "sizes": "216x216"
+    },
+    {
+      "src": "logo256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "logo1024.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    }
+  ],
+  "start_url" : "/investment-manager-app/",
+  "scope" : "/investment-manager-app/",
+  "id" :"/investment-manager-app/",
+  "display": "standalone",
+  "theme_color" : "#ffe4b3",
+  "background_color" : "#fffce6",
+  "lang" : "es",
+  "orientation" : "portrait",
+  "description" : "An appp for contability purpose"
+}
