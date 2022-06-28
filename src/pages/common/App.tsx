@@ -25,7 +25,7 @@ const App = ()=>{
 
     return <Theme.Provider value={{theme,setTheme:handleTheme}}>
         <Database.Provider value={db}>
-            <Router>
+            <Router basename="/investment-manager-app">
                 <Routes>
                     <>
                     <Route index element={<CurrencyManager/>} />                
