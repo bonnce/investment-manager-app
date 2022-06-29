@@ -101,6 +101,7 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
         }
         
         const handleTouchStart = (e:TouchEvent)=>{
+            e.preventDefault()
             const target = e.target as HTMLDivElement
             const touch = e.changedTouches[0]
             zoom(target,touch.clientX,touch.clientY)

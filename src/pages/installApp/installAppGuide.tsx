@@ -14,12 +14,12 @@ const InstallAppGuide = ()=>
         <h3 className="guide-title">Chrome
         <Icon icon={chrome} alt="chrome" className="guide-icon" />
         </h3>
-        <p className="guide-content">{CHROMEGUIDE}</p>
+        <span className="guide-content">{CHROMEGUIDE}</span>
         <InstallApp />
     </div>
     <div className="container column">
         <h3 className="guide-title">IOS and MACOS</h3>
-        <p className="guide-content">
+        <span className="guide-content">
             {IOSMACOS1}
             <Icon icon={safari} alt="safari" className="guide-icon" />
             {IOSMACOS2}
@@ -27,26 +27,26 @@ const InstallAppGuide = ()=>
             {IOSMACOS3}
             <ThemedIcon icon={squarePlus} alt="squarePlus" className="guide-icon" />
             {IOSMACOS4}
-        </p>
+        </span>
     </div>
     <div className="container column">
         <h3 className="guide-title">Android</h3>
-        <p className="guide-content">
+        <span className="guide-content">
             {ANDROID1}
             <ThemedIcon icon={kebabMenu} alt="kebabMenu" className="guide-icon" />
             {ANDROID2}
             <ThemedIcon icon={mobileInstall} alt="mobileInstall" className="guide-icon" />
-        </p>
+        </span>
     </div>
     <div className="container column">
         <h3 className="guide-title">DESKTOP</h3>
-        <p className="guide-content">
+        <span className="guide-content">
             {DESKTOP1}
             <ThemedIcon icon={desktopDowndload} alt="desktopDowndload" className="guide-icon" />
             {DESKTOP2}
             <ThemedIcon icon={kebabMenu} alt="kebabMenu" className="guide-icon" />
             {DESKTOP3}
-        </p>
+        </span>
     </div>
 </div>
 

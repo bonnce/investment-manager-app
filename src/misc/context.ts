@@ -1,6 +1,6 @@
 import { IDBPDatabase } from 'idb'
 import React from 'react'
-import { iCurrencyDB } from './types'
+import { BeforeInstallPromptEvent, iCurrencyDB } from './types'
 
 const themes = {
     light:{
@@ -21,12 +21,14 @@ const themes = {
     }
 }
 
-
+const DeferredPrompt = React.createContext<{deferredPrompt:BeforeInstallPromptEvent | null,
+                                            setDeferredPrompt:React.Dispatch<React.SetStateAction<BeforeInstallPromptEvent | null>>}>({deferredPrompt:null, setDeferredPrompt:()=>{}})
 const Theme = React.createContext({theme:themes.light,setTheme:()=>{}})
 const Database = React.createContext<IDBPDatabase<iCurrencyDB>|null>(null)
 
 export{
     themes,
     Theme,
-    Database
+    Database,
+    DeferredPrompt
 }

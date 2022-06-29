@@ -1,8 +1,9 @@
 import { BasicButton } from "components"
-import { useDeferredPrompt } from "misc"
+import { DeferredPrompt } from "misc"
+import { useContext } from "react"
 
 const InstallApp = ()=>{
-    const [deferredPrompt,setDeferredPrompt] = useDeferredPrompt()
+    const {deferredPrompt,setDeferredPrompt} = useContext(DeferredPrompt)
     const handleClick = ()=>{
         deferredPrompt?.prompt()
         setDeferredPrompt(null)
