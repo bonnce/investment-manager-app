@@ -1,7 +1,7 @@
 import { BeforeInstallPromptEvent } from "misc"
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
-const useDeferredPrompt = ()=>{
+const useDeferredPrompt = ():[BeforeInstallPromptEvent|null,Dispatch<SetStateAction<BeforeInstallPromptEvent | null>>]=>{
     const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent|null>(null)
     const handleInstallPrompt = (e:BeforeInstallPromptEvent)=>{
         e.preventDefault()
@@ -10,7 +10,7 @@ const useDeferredPrompt = ()=>{
     useEffect(()=>{
         window.addEventListener('beforeinstallprompt', handleInstallPrompt)
     },[])  
-    return deferredPrompt
+    return [deferredPrompt,setDeferredPrompt]
 }
 
 export default useDeferredPrompt

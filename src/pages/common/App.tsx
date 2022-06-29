@@ -1,7 +1,7 @@
 import { IDBPDatabase } from "idb"
 import { themes, Theme, createDB, Database, NAMEDB} from "misc"
 import { iCurrencyDB } from "misc/types"
-import { CurrencyManager, Summary } from "pages"
+import { CurrencyManager, Summary, InstallAppPage } from "pages"
 import { useEffect, useState } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import CurrencyRoutes from "./currencyRoutes"
@@ -31,6 +31,7 @@ const App = ()=>{
                     <Route index element={<CurrencyManager/>} />                
                     <Route path='/summary' element={<Summary/>} />
                     {CurrencyRoutes(db)}
+                    <Route path='/install' element={<InstallAppPage/>} />
                     </>
                 </Routes>
             </Router>

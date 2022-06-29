@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import Navigation from './navigation'
 import cross from 'assets/images/cross.svg'
 import {ThemedIcon2x2} from 'components'
-import InstallApp from 'components/installApp'
 
 
 const Menu = ()=>{
@@ -15,7 +14,6 @@ const Menu = ()=>{
             <h2 className='menu-title'>investment manager app</h2>
         </div>
         <Navigation handleLinkClick={handleClick} />
-        <InstallApp/>
     </div>
 }
 

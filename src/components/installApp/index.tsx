@@ -1,10 +1,18 @@
-import { InstallButton } from "components"
+import { BasicButton } from "components"
 import { useDeferredPrompt } from "misc"
 
 const InstallApp = ()=>{
-    const deferredPrompt = useDeferredPrompt()
+    const [deferredPrompt,setDeferredPrompt] = useDeferredPrompt()
+    const handleClick = ()=>{
+        deferredPrompt?.prompt()
+        setDeferredPrompt(null)
+    }
     return <>
-        <InstallButton/>
+        {deferredPrompt &&
+        <BasicButton className="install-button" onClick={handleClick}>
+            Install
+        </BasicButton>
+        }
 
     </>
 }

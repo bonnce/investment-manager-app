@@ -23,6 +23,7 @@ const Navigation = ({handleLinkClick} : {handleLinkClick:VoidFunction}) => {
             {data && data.map((i) => 
             <BaseLink to={`/${i.shortName}`} className='uppercase' key={i.shortName} onClick={handleLinkClick} >{i.shortName}</BaseLink>)}
         </Collapse>
+        <BaseLink to='/install' onClick={handleLinkClick}>Guia de instalacion</BaseLink>
     </div>
 }
 
