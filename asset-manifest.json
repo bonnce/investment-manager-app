@@ -1,27 +1,34 @@
 {
   "files": {
-    "main.css": "/investment-manager-app/static/css/main.c35c493b.css",
-    "main.js": "/investment-manager-app/static/js/main.071b05a8.js",
+    "main.css": "/investment-manager-app/static/css/main.d7d0383f.css",
+    "main.js": "/investment-manager-app/static/js/main.84cd1992.js",
     "static/js/787.7ccb2796.chunk.js": "/investment-manager-app/static/js/787.7ccb2796.chunk.js",
     "service-worker.js": "/investment-manager-app/service-worker.js",
     "static/media/sun.svg": "/investment-manager-app/static/media/sun.d30582548123d057e1abf9d2012fd786.svg",
     "static/media/cold.svg": "/investment-manager-app/static/media/cold.b7c5a8087fc78910ce32b4ff84c1f0f6.svg",
+    "static/media/chrome.svg": "/investment-manager-app/static/media/chrome.a7ed18ca516f6cc981695647a61814ea.svg",
+    "static/media/mobileInstall.svg": "/investment-manager-app/static/media/mobileInstall.3bf0a2cd2903d12a39016541c1c3f6dc.svg",
     "static/media/loading.svg": "/investment-manager-app/static/media/loading.3e9e5452b4cf41c80c4a80bb6aaaef82.svg",
+    "static/media/shareIOS.svg": "/investment-manager-app/static/media/shareIOS.45d472549fd86f1c91b4ca2a18671118.svg",
     "static/media/trashOpenDark.svg": "/investment-manager-app/static/media/trashOpenDark.dcd329bf83a54686f1a4f5993aef2f41.svg",
     "static/media/trashOpenLight.svg": "/investment-manager-app/static/media/trashOpenLight.3df9a90d25c6bab985a59ce0af2e8503.svg",
     "static/media/trashCloseDark.svg": "/investment-manager-app/static/media/trashCloseDark.19c11c6d2495e8c658a6aaa34abaa53d.svg",
     "static/media/trashCloseLight.svg": "/investment-manager-app/static/media/trashCloseLight.643eb071c122d86d4bec7181401297b2.svg",
     "static/media/burger.svg": "/investment-manager-app/static/media/burger.8c004292b9e0d8b6a5d63f9e22e94556.svg",
+    "static/media/safari.svg": "/investment-manager-app/static/media/safari.74317acb97c9ef63f0749b16975b8a28.svg",
+    "static/media/desktopDowndload.svg": "/investment-manager-app/static/media/desktopDowndload.221edceced2dc7871cdda1adbaf4953c.svg",
+    "static/media/kebabMenu.svg": "/investment-manager-app/static/media/kebabMenu.5a81fdadc22cbf9ad2226cde41451509.svg",
     "index.html": "/investment-manager-app/index.html",
     "static/media/cross.svg": "/investment-manager-app/static/media/cross.5b316c85f6f8b8285ca60d9eb50df84b.svg",
     "static/media/right.svg": "/investment-manager-app/static/media/right.9b7b300c45158d4ecddf4581c2fba162.svg",
     "static/media/down.svg": "/investment-manager-app/static/media/down.22203a0f1b701cc5dfff688227e40777.svg",
-    "main.c35c493b.css.map": "/investment-manager-app/static/css/main.c35c493b.css.map",
-    "main.071b05a8.js.map": "/investment-manager-app/static/js/main.071b05a8.js.map",
+    "static/media/squarePlus.svg": "/investment-manager-app/static/media/squarePlus.fdc1122398a30d49809b7616080459a0.svg",
+    "main.d7d0383f.css.map": "/investment-manager-app/static/css/main.d7d0383f.css.map",
+    "main.84cd1992.js.map": "/investment-manager-app/static/js/main.84cd1992.js.map",
     "787.7ccb2796.chunk.js.map": "/investment-manager-app/static/js/787.7ccb2796.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c35c493b.css",
-    "static/js/main.071b05a8.js"
+    "static/css/main.d7d0383f.css",
+    "static/js/main.84cd1992.js"
   ]
 }
