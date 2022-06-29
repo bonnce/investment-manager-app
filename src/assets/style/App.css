@@ -112,8 +112,8 @@
   font-family: inherit;
   padding-left: .8em;
   padding-right: .8em;
-  padding-top: .2em;
-  padding-bottom: .2em; 
+  padding-top: .5em;
+  padding-bottom: .5em; 
   border-radius: .25em;
   border: none;
   transition: background-color 100ms ease, box-shadow 100ms ease ;
@@ -225,18 +225,29 @@
   transition: opacity .5s ease;
 }
 
-.diamond-button{
-  width: 4em;
-  height: 4em;
-  padding:1em;
-  transform: rotate(45deg);
+.button{
   transition: background-color 100ms ease, box-shadow 100ms ease ;
   border: none;
 }
 
-.diamond-button:active{
+.button:active{
   transition: background-color 100ms ease, box-shadow 100ms ease ;
 }
+
+.diamond-button{
+  width: 4em;
+  height: 4em;
+  padding: 1em;
+  transform: rotate(45deg);
+}
+
+.install-button{
+  font-size: 2.5em;
+  font-weight: 600;
+  padding: 1em;
+  border-radius: .25em;
+}
+
 
 .theme-icon{
   flex-grow: 1;

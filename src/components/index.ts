@@ -6,7 +6,7 @@ import {Card, PanCard} from "./card";
 import { InputButton, InputText, InvisibleInput } from "./input";
 import Menu from "./menu";
 import Collapse from "./collapse";
-import { DiamondButton, PlusButton } from "./button";
+import { BasicButton, PlusButton, InstallButton } from "./button";
 import Footer from "./footer";
 import { DangerLines, TrashZone } from "./dangerZone";
 
@@ -23,11 +23,12 @@ export {
     InputText,
     Menu,
     Collapse,
-    DiamondButton,
+    BasicButton,
     PlusButton,
     InvisibleInput,
     LoadingIcon,
     Footer,
     DangerLines,
-    TrashZone
+    TrashZone,
+    InstallButton
 }
