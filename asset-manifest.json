@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/investment-manager-app/static/css/main.d7d0383f.css",
-    "main.js": "/investment-manager-app/static/js/main.84cd1992.js",
+    "main.js": "/investment-manager-app/static/js/main.55e0b903.js",
     "static/js/787.7ccb2796.chunk.js": "/investment-manager-app/static/js/787.7ccb2796.chunk.js",
     "service-worker.js": "/investment-manager-app/service-worker.js",
     "static/media/sun.svg": "/investment-manager-app/static/media/sun.d30582548123d057e1abf9d2012fd786.svg",
@@ -24,11 +24,11 @@
     "static/media/down.svg": "/investment-manager-app/static/media/down.22203a0f1b701cc5dfff688227e40777.svg",
     "static/media/squarePlus.svg": "/investment-manager-app/static/media/squarePlus.fdc1122398a30d49809b7616080459a0.svg",
     "main.d7d0383f.css.map": "/investment-manager-app/static/css/main.d7d0383f.css.map",
-    "main.84cd1992.js.map": "/investment-manager-app/static/js/main.84cd1992.js.map",
+    "main.55e0b903.js.map": "/investment-manager-app/static/js/main.55e0b903.js.map",
     "787.7ccb2796.chunk.js.map": "/investment-manager-app/static/js/787.7ccb2796.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d7d0383f.css",
-    "static/js/main.84cd1992.js"
+    "static/js/main.55e0b903.js"
   ]
 }
