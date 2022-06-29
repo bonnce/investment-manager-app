@@ -85,6 +85,7 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
         }
     
         const handleTouchMove = (e:TouchEvent)=>{
+            e.preventDefault()
             const touch = e.targetTouches[0]
             const target = touch.target as HTMLDivElement
             drag(target,touch.clientX,touch.clientY)
@@ -94,16 +95,16 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
             
             const target = e.target as HTMLDivElement
             const touch = e.changedTouches[0]
-    
+
             reset(target)
             const dead = inDeadZone(touch.clientX)
             if(dead) onDeadZone?.()
         }
         
         const handleTouchStart = (e:TouchEvent)=>{
-            e.preventDefault()
             const target = e.target as HTMLDivElement
             const touch = e.changedTouches[0]
+
             zoom(target,touch.clientX,touch.clientY)
         }
         const handleMouseMove = (ev: MouseEvent)=>{
@@ -131,7 +132,6 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
             if(dead) onDeadZone?.()
         }
 
-        const actualRef = panRef
         if(panRef.current){
             panRef.current.addEventListener('mousedown',handleMouseDownEvent)
             panRef.current.addEventListener('mousemove',handleMouseMove)
@@ -144,20 +144,19 @@ const PanCard = ({children, onDeadZone, isDraggin, isInDZ} :
             panRef.current.addEventListener('touchstart',handleTouchStart)
             panRef.current.addEventListener('touchmove',handleTouchMove)
         }
+        const actualRef = panRef.current
+
         return ()=>{
-            if(actualRef.current){
-                actualRef.current.removeEventListener('mousedown',handleMouseDownEvent)
-                actualRef.current.removeEventListener('mousemove',handleMouseMove)
-                actualRef.current.removeEventListener('mouseup',handleMouseLeavesEvent)
-                actualRef.current.removeEventListener('mouseleave',handleMouseLeavesEvent)
-                actualRef.current.addEventListener('touchstart',handleTouchStart)
-                actualRef.current.addEventListener('touchmove',handleTouchMove)
-                actualRef.current.addEventListener('touchcancel',handleTouchEnd)
-                actualRef.current.addEventListener('touchend',handleTouchEnd)
-            }
-            document.removeEventListener('mousemove',handleMouseMove)
+                actualRef?.removeEventListener('mousedown',handleMouseDownEvent)
+                actualRef?.removeEventListener('mousemove',handleMouseMove)
+                actualRef?.removeEventListener('mouseup',handleMouseLeavesEvent)
+                actualRef?.removeEventListener('mouseleave',handleMouseLeavesEvent)
+                actualRef?.addEventListener('touchstart',handleTouchStart)
+                actualRef?.addEventListener('touchmove',handleTouchMove)
+                actualRef?.addEventListener('touchcancel',handleTouchEnd)
+                actualRef?.addEventListener('touchend',handleTouchEnd)
         }
-    },[panRef.current,isDrag,width,height, onDeadZone])
+    },[isDrag,width,height])
 
     return <div ref={panRef} className="container card pan-card" data-drag={true}
     style={{backgroundColor: theme.thirty, boxShadow: `0 2px 2px 0 ${theme.ten}80, 0 4px 4px 0 ${theme.thirty}`, 
