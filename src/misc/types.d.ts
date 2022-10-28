@@ -50,10 +50,20 @@ declare global {
     }
 }
 
+type currencyResponse = {
+    data:iCurrency[]
+}
+
+type shoppingResponse = {
+    data:iShopping[]
+}
+
 export {
     iCurrency,
     iCurrencyDB,
     iShopping,
     iScore,
+    currencyResponse,
+    shoppingResponse,
     BeforeInstallPromptEvent
 }

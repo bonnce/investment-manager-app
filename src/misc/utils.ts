@@ -13,6 +13,12 @@ const leftRate = (top:number,bottom:number,x:number) => (top-x)/(top-bottom)
 
 const timeout = async (ms:number) => await new Promise(r => setTimeout(r,ms)) 
 
+const compareLists = <T>(first:T[], second:Array<T>):Array<T> => {
+  if(first.length >= second.length){
+    return first.filter((f,i) => f !== second[i])
+  }
+}
+
 export{
   handleTotal,
   handleMenu,

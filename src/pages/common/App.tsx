@@ -1,5 +1,6 @@
 import { IDBPDatabase } from "idb"
-import { themes, Theme, createDB, Database, NAMEDB, useDeferredPrompt, DeferredPrompt} from "misc"
+import { themes, Theme, createDB, Database, NAMEDB, useDeferredPrompt, DeferredPrompt, getAll} from "misc"
+import { getAllCurrencies, getAllShoppings } from "misc/apiServices"
 import { iCurrencyDB } from "misc/types"
 import { CurrencyManager, Summary, InstallAppPage } from "pages"
 import { useEffect, useState } from "react"
@@ -15,6 +16,16 @@ const App = ()=>{
         setDB(db)
     }
 
+    const syncApi = async ()=>{
+        if(db){
+            const currenciesAPI = await getAllCurrencies().catch(e=> console.log(e))
+            const shoppingsAPI = await getAllShoppings()
+            const currenciesDB = await getAll(db, 'currencies')
+            const shoppingsDB = await getAll(db, 'shopping')
+
+        }
+    }
+
     const handleTheme = ()=>{
         setTheme(t => t===themes.dark ? themes.light : themes.dark)
     }
@@ -22,6 +33,7 @@ const App = ()=>{
 
     useEffect(()=>{
         handleDB()
+        syncApi()
     },[])
 
     return <Theme.Provider value={{theme,setTheme:handleTheme}}>
