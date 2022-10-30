@@ -47,8 +47,8 @@ const ContainerCard = ({id}:{id?:number}) =>{
     const handleClick = async ()=>{
 		if(db && data){
 			const newShopping = {cost:'',bought:'',currency:data.id}
-			const resultShopping = await save(db,NAMECOLLSHOPPING,newShopping)
-            await saveShopping(newShopping)
+            const apiResult = await saveShopping(newShopping)
+			const resultShopping = await save(db,NAMECOLLSHOPPING,apiResult)
 			if(typeof resultShopping === 'number'){
                 setCards(c=> [...c,{...newShopping,id:resultShopping}])
                 const newCurrency = {...data, shopping: [...data.shopping,resultShopping]}
