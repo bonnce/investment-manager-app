@@ -1,7 +1,8 @@
 import { IDBPDatabase } from "idb"
-import { themes, Theme, createDB, Database, NAMEDB, useDeferredPrompt, DeferredPrompt, getAll} from "misc"
+import { themes, Theme, createDB, Database, NAMEDB, useDeferredPrompt, DeferredPrompt, getAll, save} from "misc"
 import { getAllCurrencies, getAllShoppings } from "misc/apiServices"
-import { iCurrencyDB } from "misc/types"
+import { CurrencyReal, iCurrencyDB, ShoppingReal } from "misc/types"
+import { compareListsObjById } from "misc/utils"
 import { CurrencyManager, Summary, InstallAppPage } from "pages"
 import { useEffect, useState } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
@@ -11,18 +12,29 @@ const App = ()=>{
     const [theme,setTheme] = useState(themes.light)
     const [db,setDB] = useState<IDBPDatabase<iCurrencyDB>|null>(null)
     
-    const handleDB = async ()=>{
+    const main = async ()=>{
         const db = await createDB(NAMEDB)
         setDB(db)
+        syncApi(db)
     }
 
-    const syncApi = async ()=>{
+    const syncApi = async (db:IDBPDatabase<iCurrencyDB>| null)=>{
         if(db){
-            const currenciesAPI = await getAllCurrencies().catch(e=> console.log(e))
+            const currenciesAPI = await getAllCurrencies()
             const shoppingsAPI = await getAllShoppings()
-            const currenciesDB = await getAll(db, 'currencies')
-            const shoppingsDB = await getAll(db, 'shopping')
-
+            const currenciesDB = await getAll(db, 'currencies') as CurrencyReal[]
+            const shoppingsDB = await getAll(db, 'shopping') as ShoppingReal[]
+            if(currenciesDB && shoppingsDB){
+                const remainedCurrencies = compareListsObjById<CurrencyReal>(currenciesAPI,currenciesDB)
+                const remainedShoppings = compareListsObjById<ShoppingReal>(shoppingsAPI,shoppingsDB)
+                remainedCurrencies.forEach(async rc => {
+                   await save(db,'currencies',rc)
+                })
+                remainedShoppings.forEach(async rs => {
+                   await save(db,'shopping',rs)
+                })
+            }
+            
         }
     }
 
@@ -32,9 +44,8 @@ const App = ()=>{
     const [deferredPrompt,setDeferredPrompt] = useDeferredPrompt()
 
     useEffect(()=>{
-        handleDB()
-        syncApi()
-    },[])
+        main()
+    }, [])
 
     return <Theme.Provider value={{theme,setTheme:handleTheme}}>
         <Database.Provider value={db}>

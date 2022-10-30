@@ -1,11 +1,13 @@
 import { InvisibleInput, LoadingIcon } from "components"
 import { ChangeEventHandler, useContext, useEffect, useState, useTransition } from "react"
-import { iCurrency, update, Database, iShopping, NAMECOLLSHOPPING, handleTotal, remove, NAMECOLLCURRENCY } from "misc"
+import { update, Database, iShopping, NAMECOLLSHOPPING, handleTotal, remove, NAMECOLLCURRENCY } from "misc"
 import { PanCard } from "components"
+import { deleteShopping, updateCurrency, updateShopping } from "misc/apiServices"
+import { CurrencyReal } from "misc/types"
 
 
 const PurchaseCard = ({currency,actual, isDraggin, isInDZ} : 
-    {currency?:iCurrency,actual:iShopping, isDraggin:(d:boolean)=>void, isInDZ:(str?:'left'|'right')=>void})=>{
+    {currency?:CurrencyReal,actual:iShopping, isDraggin:(d:boolean)=>void, isInDZ:(str?:'left'|'right')=>void})=>{
     const db = useContext(Database)
     const [cost, setCost] = useState(actual?.cost || '')
     const [bought, setBought] = useState(actual?.bought  || '')
@@ -16,15 +18,19 @@ const PurchaseCard = ({currency,actual, isDraggin, isInDZ} :
     const handleUpdate =async (newShopping:iShopping) => {
         if(db){
             const resultCost = await update(db,NAMECOLLSHOPPING,newShopping)
+            if(newShopping.id)
+            await updateShopping(newShopping.id, newShopping)
         }
     }
 
     const handleDelete = async ()=>{
         if(db && currency && actual.id){
             const resultDelete = await remove(db,NAMECOLLSHOPPING,actual.id)
-            const messi = currency.shopping.filter(i=> actual.id !== i)
-            const newCurrency = {...currency,shopping:messi}
+            await deleteShopping(actual.id)
+            const shoppingList = currency.shopping.filter(i=> actual.id !== i)
+            const newCurrency = {...currency,shopping:shoppingList}
             const resultCurrency = await update(db,NAMECOLLCURRENCY,newCurrency)
+            await updateCurrency(currency.id,{shopping:shoppingList})
         }
     }
     

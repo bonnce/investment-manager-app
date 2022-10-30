@@ -14,6 +14,10 @@ interface iCurrency {
     shopping: Array<number>;
 }
 
+type ShoppingReal = Required<iShopping>
+
+type CurrencyReal = Required<iCurrency>
+
 //Schema
 interface iCurrencyDB extends DBSchema{
     currencies: {
@@ -65,5 +69,7 @@ export {
     iScore,
     currencyResponse,
     shoppingResponse,
-    BeforeInstallPromptEvent
+    BeforeInstallPromptEvent,
+    CurrencyReal,
+    ShoppingReal
 }

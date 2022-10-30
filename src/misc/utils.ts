@@ -13,15 +13,18 @@ const leftRate = (top:number,bottom:number,x:number) => (top-x)/(top-bottom)
 
 const timeout = async (ms:number) => await new Promise(r => setTimeout(r,ms)) 
 
-const compareLists = <T>(first:T[], second:Array<T>):Array<T> => {
-  if(first.length >= second.length){
-    return first.filter((f,i) => f !== second[i])
-  }
+const includesObjById = <M extends { id: number}>(arr:M[], id:number): boolean => arr.filter(obj => obj.id === id).length > 0
+
+const compareListsObjById = <M extends { id: number}>(first: M[], second:M[]): M[] | [] => {
+  const remain = first.length - second.length
+  return remain < 0 ? [] :
+  first.filter(f => !includesObjById<M>(second,f.id))
 }
 
 export{
   handleTotal,
   handleMenu,
   leftRate,
-  timeout
+  timeout,
+  compareListsObjById
 } 

@@ -62,7 +62,6 @@ const save = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRENC
         const isInStore = item?.id && await get(db,nameColl,item.id)
         if(isInStore) return "Already in database"
 
-
         const tx = db.transaction(nameColl,'readwrite')
         const store = tx.objectStore(nameColl)
 
@@ -70,7 +69,7 @@ const save = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRENC
         await tx.done
         return key
     }catch(e){
-        console.error('there is an error with remove method: ',e)
+        console.error('there is an error with save method: ',e)
         return null
     }
 }

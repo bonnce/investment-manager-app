@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { iCurrency, iShopping, shoppingResponse, currencyResponse } from './types'
+import { CurrencyReal, iCurrency, iShopping, ShoppingReal } from './types'
 
 const domain = process.env.DOMAIN ?? 'http://localhost:8080'
 
@@ -9,9 +9,9 @@ const api = axios.create({
 
 // currencies calls -------------
 
-export const getAllCurrencies = async (): Promise<iCurrency[]> => {
+export const getAllCurrencies = async (): Promise<CurrencyReal[]> => {
     try{
-        const result = await api.get<iCurrency[]>("/currencies")
+        const result = await api.get<CurrencyReal[]>("/currencies")
         return result.data
         
     }catch(e){
@@ -20,9 +20,9 @@ export const getAllCurrencies = async (): Promise<iCurrency[]> => {
     }
 }
 
-export const saveCurrency = async (currency: iCurrency): Promise<iCurrency> => {
+export const saveCurrency = async (currency: iCurrency): Promise<CurrencyReal> => {
     try{
-        const result = await api.post<iCurrency>("/currencies", currency)
+        const result = await api.post<CurrencyReal>("/currencies", currency)
         return result.data
         
     }catch(e){
@@ -31,9 +31,9 @@ export const saveCurrency = async (currency: iCurrency): Promise<iCurrency> => {
     }
 }
 
-export const updateCurrency = async (id: number,currency: iCurrency): Promise<iCurrency> => {
+export const updateCurrency = async (id: number,currency: Partial<iCurrency>): Promise<CurrencyReal> => {
     try{
-        const result = await api.put<iCurrency>(`/currencies/${id}`, currency)
+        const result = await api.put<CurrencyReal>(`/currencies/${id}`, currency)
         return result.data
         
     }catch(e){
@@ -44,9 +44,9 @@ export const updateCurrency = async (id: number,currency: iCurrency): Promise<iC
 
 // shopping calls -------------
 
-export const getAllShoppings = async (): Promise<iShopping[]> => {
+export const getAllShoppings = async (): Promise<ShoppingReal[]> => {
     try{
-        const result = await api.get<iShopping[]>("/investments")
+        const result = await api.get<ShoppingReal[]>("/investments")
         return result.data
         
     }catch(e){
@@ -55,9 +55,9 @@ export const getAllShoppings = async (): Promise<iShopping[]> => {
     }
 }
 
-export const saveShopping = async (shopping: iShopping): Promise<iShopping> => {
+export const saveShopping = async (shopping: iShopping): Promise<ShoppingReal> => {
     try{
-        const result = await api.post<iShopping>("/investments", shopping)
+        const result = await api.post<ShoppingReal>("/investments", shopping)
         return result.data
         
     }catch(e){
@@ -66,9 +66,20 @@ export const saveShopping = async (shopping: iShopping): Promise<iShopping> => {
     }
 }
 
-export const deleteShopping = async (id: number): Promise<iShopping> => {
+export const deleteShopping = async (id: number): Promise<ShoppingReal> => {
     try{
-        const result = await api.delete<iShopping>(`/investments/${id}`)
+        const result = await api.delete<ShoppingReal>(`/investments/${id}`)
+        return result.data
+        
+    }catch(e){
+        const {message} = e as Error
+        throw new Error(`Ups! the next error appeared: ${message}`)
+    }
+}
+
+export const updateShopping = async (id: number,shopping: Partial<iShopping>): Promise<ShoppingReal> => {
+    try{
+        const result = await api.put<ShoppingReal>(`/investments/${id}`, shopping)
         return result.data
         
     }catch(e){

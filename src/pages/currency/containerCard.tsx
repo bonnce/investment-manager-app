@@ -1,12 +1,14 @@
 import { Footer, PlusButton } from "components";
-import { Database, get, iCurrency, NAMECOLLCURRENCY, iShopping, update, INDEXSHOPPINGDB, NAMECOLLSHOPPING, save, iScore, handleTotal } from "misc";
+import { Database, get, NAMECOLLCURRENCY, iShopping, update, INDEXSHOPPINGDB, NAMECOLLSHOPPING, save, iScore, handleTotal } from "misc";
+import { saveShopping, updateCurrency } from "misc/apiServices";
+import { CurrencyReal } from "misc/types";
 import { useContext, useEffect, useMemo, useState } from "react";
 import DangerZoneDraggin from "./dangerZoneDraggin";
 import PurchaseCard from "./purchaseCard";
 
 const ContainerCard = ({id}:{id?:number}) =>{
     const db = useContext(Database)
-    const [data,setData] = useState<iCurrency | undefined>(undefined)
+    const [data,setData] = useState<CurrencyReal | undefined>(undefined)
     const [cards,setCards] = useState<iShopping[]>([])
     const [scores,setScores] = useState<Array<iScore>>([])
     const [isDrag,setIsDrag] = useState<boolean | null>(null)
@@ -46,10 +48,12 @@ const ContainerCard = ({id}:{id?:number}) =>{
 		if(db && data){
 			const newShopping = {cost:'',bought:'',currency:data.id}
 			const resultShopping = await save(db,NAMECOLLSHOPPING,newShopping)
+            await saveShopping(newShopping)
 			if(typeof resultShopping === 'number'){
                 setCards(c=> [...c,{...newShopping,id:resultShopping}])
                 const newCurrency = {...data, shopping: [...data.shopping,resultShopping]}
 				const result = await update(db,NAMECOLLCURRENCY,newCurrency)
+                await updateCurrency(data.id,{shopping:newCurrency.shopping})
 			}
 		} 
     }
@@ -59,7 +63,7 @@ const ContainerCard = ({id}:{id?:number}) =>{
     useEffect(()=>{
         const getData = async ()=>{
             if(db && id){
-                const rawDataCurrency = await get(db,NAMECOLLCURRENCY,id) as iCurrency
+                const rawDataCurrency = await get(db,NAMECOLLCURRENCY,id) as CurrencyReal
                 setData(rawDataCurrency)
                 const rawDataShopping = await db.getAllFromIndex(NAMECOLLSHOPPING,INDEXSHOPPINGDB,id) as iShopping[]
                 setCards(rawDataShopping)
