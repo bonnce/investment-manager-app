@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invm-app
+  labels:
+    app: invm-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: invm-app
+      role: invm-app
+  template:
+    metadata:
+      labels:
+        app: invm-app
+        role: invm-app
+    spec:
+      containers:
+      - name: invm-app
+        image: bonnce/invm-app:1.0.0
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: invm-app
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    role: invm-app
