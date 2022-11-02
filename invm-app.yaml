@@ -19,6 +19,9 @@ spec:
       containers:
       - name: invm-app
         image: bonnce/invm-app:1.0.0
+        env:
+        - name: DOMAIN
+          value: "http://invm-api:8080"
         ports:
         - containerPort: 3000
 ---
