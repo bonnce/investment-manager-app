@@ -45,6 +45,8 @@ const App = ()=>{
 
     useEffect(()=>{
         main()
+        fetch('http://invm-api:8080/').then(res=> console.log(res, 'fetch 1')).catch(e=>console.log(e,'fetch 1 error'))
+        fetch('http://investment-manager:80/').then(res=> console.log(res, 'fetch 1')).catch(e=>console.log(e,'fetch 1 error'))
     }, [])
 
     return <Theme.Provider value={{theme,setTheme:handleTheme}}>
