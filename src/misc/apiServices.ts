@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { CurrencyReal, iCurrency, iShopping, ShoppingReal } from './types'
 
-const domain = process.env.NODE_ENV === 'production'? 'http://invm-api:8080' : 'http://localhost:8080'
+const domain = process.env.NODE_ENV === 'production'? '' : 'http://localhost:8080'
 
 console.log(domain)
 
