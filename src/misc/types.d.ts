@@ -62,6 +62,10 @@ type shoppingResponse = {
     data:iShopping[]
 }
 
+type genericObj = {
+    [key:string]:number|string|number[]
+}
+
 export {
     iCurrency,
     iCurrencyDB,
@@ -71,5 +75,6 @@ export {
     shoppingResponse,
     BeforeInstallPromptEvent,
     CurrencyReal,
-    ShoppingReal
+    ShoppingReal,
+    genericObj
 }

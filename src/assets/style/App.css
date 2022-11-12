@@ -305,6 +305,7 @@
 
 .purchase-button{
   margin-bottom: 8em;
+  cursor: pointer;
 }
 
 .purchase-card{

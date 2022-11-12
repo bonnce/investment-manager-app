@@ -1,6 +1,6 @@
 import { IDBPDatabase } from "idb"
-import { themes, Theme, createDB, Database, NAMEDB, useDeferredPrompt, DeferredPrompt, getAll, save} from "misc"
-import { getAllCurrencies, getAllShoppings } from "misc/apiServices"
+import { themes, Theme, createDB, Database, NAMEDB, useDeferredPrompt, DeferredPrompt, getAll, save, remove, NAMECOLLCURRENCY, NAMECOLLSHOPPING} from "misc"
+import { getAllCurrencies, getAllShoppings, saveCurrency, saveShopping } from "misc/apiServices"
 import { CurrencyReal, iCurrencyDB, ShoppingReal } from "misc/types"
 import { compareListsObjById } from "misc/utils"
 import { CurrencyManager, Summary, InstallAppPage } from "pages"
@@ -22,17 +22,32 @@ const App = ()=>{
         if(db){
             const currenciesAPI = await getAllCurrencies()
             const shoppingsAPI = await getAllShoppings()
-            const currenciesDB = await getAll(db, 'currencies') as CurrencyReal[]
-            const shoppingsDB = await getAll(db, 'shopping') as ShoppingReal[]
+            const currenciesDB = await getAll(db, NAMECOLLCURRENCY) as CurrencyReal[]
+            const shoppingsDB = await getAll(db, NAMECOLLSHOPPING) as ShoppingReal[]
             if(currenciesDB && shoppingsDB){
-                const remainedCurrencies = compareListsObjById<CurrencyReal>(currenciesAPI,currenciesDB)
-                const remainedShoppings = compareListsObjById<ShoppingReal>(shoppingsAPI,shoppingsDB)
-                remainedCurrencies.forEach(async rc => {
-                   await save(db,'currencies',rc)
-                })
+                const [remainedCurrencies,currOffline] = compareListsObjById<CurrencyReal>(currenciesAPI,currenciesDB)
+                const [remainedShoppings,invOffline] = compareListsObjById<ShoppingReal>(shoppingsAPI,shoppingsDB)
+                if(currOffline)
+                    remainedCurrencies.forEach(async rc => {
+                    await saveCurrency(rc)
+                    }) 
+                else {
+                    currenciesDB.forEach(curr => remove(db,NAMECOLLCURRENCY,curr.id))
+                    currenciesAPI.forEach(async rc => {
+                        await save(db,NAMECOLLCURRENCY,rc)
+                    }) 
+                }
+
+                if(invOffline)
                 remainedShoppings.forEach(async rs => {
-                   await save(db,'shopping',rs)
+                   await saveShopping(rs)
                 })
+                else{
+                    shoppingsDB.forEach(shop => remove(db,NAMECOLLSHOPPING,shop.id))
+                    shoppingsAPI.forEach(async rs => {
+                        await save(db,NAMECOLLSHOPPING,rs)
+                    })
+                }
             }
             
         }
@@ -45,8 +60,6 @@ const App = ()=>{
 
     useEffect(()=>{
         main()
-        fetch('http://invm-api:8080/').then(res=> console.log(res, 'fetch 1')).catch(e=>console.log(e,'fetch 1 error'))
-        fetch('http://investment-manager:80/').then(res=> console.log(res, 'fetch 1')).catch(e=>console.log(e,'fetch 1 error'))
     }, [])
 
     return <Theme.Provider value={{theme,setTheme:handleTheme}}>

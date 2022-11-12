@@ -81,7 +81,7 @@ const remove = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRE
         const store = tx.objectStore(nameColl)
 
         const isInStore = await store.get(key)
-        if(!isInStore) return "not found item, cannot remove"
+        if(isInStore == null) return "not found item, cannot remove"
 
         await store.delete(key)
         await tx.done
@@ -97,7 +97,7 @@ const update = async (db:IDBPDatabase<iCurrencyDB>,nameColl:typeof NAMECOLLCURRE
     try{
 
         const isInStore = item?.id && await get(db,nameColl,item.id)
-        if(!isInStore) return "not found item, cannot update"
+        if(isInStore == null) return "not found item, cannot update"
 
 
         const tx = db.transaction(nameColl,'readwrite')

@@ -48,7 +48,9 @@ const ContainerCard = ({id}:{id?:number}) =>{
 		if(db && data){
 			const newShopping = {cost:'',bought:'',currency:data.id}
             const apiResult = await saveShopping(newShopping)
+            console.log(apiResult)
 			const resultShopping = await save(db,NAMECOLLSHOPPING,apiResult)
+            console.log(resultShopping)
 			if(typeof resultShopping === 'number'){
                 setCards(c=> [...c,{...newShopping,id:resultShopping}])
                 const newCurrency = {...data, shopping: [...data.shopping,resultShopping]}
@@ -62,7 +64,7 @@ const ContainerCard = ({id}:{id?:number}) =>{
     
     useEffect(()=>{
         const getData = async ()=>{
-            if(db && id){
+            if(db && (id || id === 0)){
                 const rawDataCurrency = await get(db,NAMECOLLCURRENCY,id) as CurrencyReal
                 setData(rawDataCurrency)
                 const rawDataShopping = await db.getAllFromIndex(NAMECOLLSHOPPING,INDEXSHOPPINGDB,id) as iShopping[]

@@ -18,13 +18,14 @@ const PurchaseCard = ({currency,actual, isDraggin, isInDZ} :
     const handleUpdate =async (newShopping:iShopping) => {
         if(db){
             const resultCost = await update(db,NAMECOLLSHOPPING,newShopping)
-            if(newShopping.id)
+            console.log(resultCost, newShopping)
+            if(newShopping.id != null)
             await updateShopping(newShopping.id, newShopping)
         }
     }
 
     const handleDelete = async ()=>{
-        if(db && currency && actual.id){
+        if(db && currency && actual.id != null){
             const resultDelete = await remove(db,NAMECOLLSHOPPING,actual.id)
             await deleteShopping(actual.id)
             const shoppingList = currency.shopping.filter(i=> actual.id !== i)
