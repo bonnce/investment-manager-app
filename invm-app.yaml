@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: invm-app
-        image: bonnce/invm-app:1.0.5
+        image: bonnce/invm-app:1.0.6
         ports:
         - containerPort: 3000
 ---
